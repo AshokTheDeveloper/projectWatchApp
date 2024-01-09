@@ -3,6 +3,7 @@ import {IoMoonSharp} from 'react-icons/io5'
 import {FiSun, FiLogOut} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import Cookies from 'js-cookie'
+
 import WatchAppContext from '../../context/WatchAppContext'
 
 import './index.css'
@@ -60,11 +61,15 @@ const Header = props => {
         return (
           <Container bgColor={isDarkModeOn}>
             <Link to="/">
-              <Logo src={logo} />
+              <Logo src={logo} alt="nxt watch logo" />
             </Link>
             <UList>
               <ListItem>
-                <ModeButton type="button" onClick={changeTheme}>
+                <ModeButton
+                  type="button"
+                  onClick={changeTheme}
+                  data-testid="theme"
+                >
                   {mode}
                 </ModeButton>
               </ListItem>

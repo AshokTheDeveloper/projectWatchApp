@@ -37,7 +37,7 @@ export const ListItem = Styled.li`
   list-style-type: none;
 `
 export const Profile = Styled.img`
-  width: 40px;
+  width: 32px;
   margin: 0px;
   @media (max-width: 576px) {
     width: 24px;

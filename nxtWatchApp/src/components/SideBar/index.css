@@ -5,3 +5,11 @@
 .on-light-mode {
   background-color: #21212111;
 }
+
+.select {
+  color: #ff0000;
+}
+
+.nav-links {
+    text-decoration: none;
+}

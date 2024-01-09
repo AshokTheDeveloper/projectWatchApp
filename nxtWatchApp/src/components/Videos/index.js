@@ -1,25 +1,25 @@
 import {Component} from 'react'
 
-import Loader from 'react-loader-spinner'
-
 import Cookies from 'js-cookie'
 
-import Header from '../Header'
+import {formatDistanceToNow} from 'date-fns'
 
-import SideBar from '../SideBar'
+import {IoIosSearch} from 'react-icons/io'
 
-import TrendingVideoItem from '../TrendingVideoItem'
+import Loader from 'react-loader-spinner'
+
+import VideoItem from '../VideoItem'
 
 import WatchAppContext from '../../context/WatchAppContext'
 
 import {
   Container,
+  VideosContainer,
+  SearchBarContainer,
+  SearchInput,
+  SearchIconContainer,
+  SearchButton,
   LoaderContainer,
-  TrendingVideosContainer,
-  TrendingTopContainer,
-  TrendTopText,
-  IconContainer,
-  FireIcon,
   FailureContainer,
   FailureImage,
   FailureText,
@@ -35,42 +35,40 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class Trending extends Component {
+class Videos extends Component {
   state = {
     apiStatus: apiStatusConstants.initial,
-    trendingVideosList: [],
+    videosList: [],
   }
 
   componentDidMount() {
-    this.getTrendingVideos()
+    this.getVideos()
   }
 
-  getTrendingVideos = async () => {
+  getVideos = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/videos/trending`
+    const apiUrl = 'https://apis.ccbp.in/videos/all?search='
     const options = {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
-      method: 'GET',
     }
+
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
       const updatedData = data.videos.map(eachItem => ({
-        channel: {
-          name: eachItem.channel.name,
-          profileImageUrl: eachItem.channel.profile_image_url,
-        },
         id: eachItem.id,
-        publishedAt: eachItem.published_at,
+        channel: eachItem.channel,
+        publishedAt: formatDistanceToNow(new Date(eachItem.published_at)),
         thumbnailUrl: eachItem.thumbnail_url,
         title: eachItem.title,
         viewCount: eachItem.view_count,
       }))
       this.setState({
-        trendingVideosList: updatedData,
+        videosList: updatedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -78,43 +76,39 @@ class Trending extends Component {
     }
   }
 
-  renderTrendingLogo = () => (
+  renderSearchBar = () => (
     <WatchAppContext.Consumer>
       {value => {
         const {isDarkModeOn} = value
-        const bgColor = isDarkModeOn ? '#181818' : '#e2e8f099'
-        const iconBgColor = isDarkModeOn ? ' #000000' : '#d7dfe9'
-        const textColor = isDarkModeOn ? ' #f1f1f1' : ''
         return (
-          <TrendingTopContainer bgColor={bgColor}>
-            <IconContainer bgColor={iconBgColor}>
-              <FireIcon />
-            </IconContainer>
-            <TrendTopText color={textColor}>Trending</TrendTopText>
-          </TrendingTopContainer>
+          <SearchBarContainer>
+            <SearchInput
+              type="search"
+              placeholder="Search"
+              color={isDarkModeOn}
+            />
+            <SearchIconContainer>
+              <SearchButton type="button" data-testid="searchButton">
+                <IoIosSearch />
+              </SearchButton>
+            </SearchIconContainer>
+          </SearchBarContainer>
         )
       }}
     </WatchAppContext.Consumer>
   )
 
-  renderTrendingVideos = () => {
-    const {trendingVideosList} = this.state
+  renderVideos = () => {
+    const {videosList} = this.state
     return (
-      <WatchAppContext.Consumer>
-        {value => {
-          const {isDarkModeOn} = value
-          const darkTheme = isDarkModeOn ? '#000000' : '#f1f5f9'
-
-          return (
-            <TrendingVideosContainer bgColor={darkTheme}>
-              {this.renderTrendingLogo()}
-              {trendingVideosList.map(eachItem => (
-                <TrendingVideoItem key={eachItem.id} videoDetails={eachItem} />
-              ))}
-            </TrendingVideosContainer>
-          )
-        }}
-      </WatchAppContext.Consumer>
+      <>
+        {this.renderSearchBar()}
+        <VideosContainer>
+          {videosList.map(eachVideo => (
+            <VideoItem key={eachVideo.id} videoDetails={eachVideo} />
+          ))}
+        </VideosContainer>
+      </>
     )
   }
 
@@ -127,9 +121,8 @@ class Trending extends Component {
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         const headingColor = isDarkModeOn ? '#ffffff' : '#000000'
         const descriptionColor = isDarkModeOn ? '#cbd5e1' : '#383838'
-        const darkTheme = isDarkModeOn ? '#000000' : '#f1f5f9'
         return (
-          <FailureContainer bgColor={darkTheme}>
+          <FailureContainer>
             <FailureImage src={themeImage} alt="failure image" />
             <FailureText color={headingColor}>
               Oops! Something Went Wrong
@@ -138,7 +131,7 @@ class Trending extends Component {
               We are having some trouble to complete your request Please try
               again
             </FailureDescription>
-            <RetryLik to="/trending">
+            <RetryLik to="/">
               <RetryButton>Retry</RetryButton>
             </RetryLik>
           </FailureContainer>
@@ -169,7 +162,7 @@ class Trending extends Component {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderTrendingVideos()
+        return this.renderVideos()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inProgress:
@@ -184,15 +177,10 @@ class Trending extends Component {
       <WatchAppContext.Consumer>
         {value => {
           const {isDarkModeOn} = value
-          const darkTheme = isDarkModeOn ? '#231f20' : '#ffffff'
           return (
-            <>
-              <Header />
-              <Container bgColor={darkTheme}>
-                <SideBar />
-                {this.renderActiveView()}
-              </Container>
-            </>
+            <Container bgColor={isDarkModeOn}>
+              {this.renderActiveView()}
+            </Container>
           )
         }}
       </WatchAppContext.Consumer>
@@ -200,4 +188,4 @@ class Trending extends Component {
   }
 }
 
-export default Trending
+export default Videos

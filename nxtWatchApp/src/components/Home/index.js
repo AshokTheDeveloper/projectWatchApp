@@ -1,83 +1,36 @@
 import {Component} from 'react'
 
-import {FaHotjar, FaGamepad} from 'react-icons/fa'
-import {HiHome} from 'react-icons/hi'
-import {RiPlayListAddFill} from 'react-icons/ri'
 import Header from '../Header'
-import Features from '../Features'
+import SideBar from '../SideBar'
+import PremiumPlan from '../PremiumPlan'
+import Videos from '../Videos'
 import WatchAppContext from '../../context/WatchAppContext'
-import {
-  Container,
-  FeaturesSection,
-  HomeContentSection,
-} from './styledComponents'
-
-const featuresList = [
-  {
-    id: 0,
-    feature: 'Home',
-    featureIcon: <HiHome />,
-  },
-  {
-    id: 1,
-    feature: 'Trending',
-    featureIcon: <FaHotjar />,
-  },
-  {
-    id: 2,
-    feature: 'Gaming',
-    featureIcon: <FaGamepad />,
-  },
-  {
-    id: 3,
-    feature: 'Saved Videos',
-    featureIcon: <RiPlayListAddFill />,
-  },
-]
+import {Container, HomeContentSection} from './styledComponents'
 
 class Home extends Component {
-  state = {
-    activeFeature: featuresList[0].id,
-  }
+  renderPremiumSubscription = () => <PremiumPlan />
 
-  onClickFeature = id => {
-    this.setState({activeFeature: id})
-  }
+  renderVideos = () => <Videos />
 
-  renderSidebarFeatures = () => {
-    const {activeFeature} = this.state
+  render() {
     return (
       <WatchAppContext.Consumer>
         {value => {
           const {isDarkModeOn} = value
           return (
-            <FeaturesSection bgColor={isDarkModeOn}>
-              {featuresList.map(eachItem => (
-                <Features
-                  key={eachItem.id}
-                  features={eachItem}
-                  onClickFeature={this.onClickFeature}
-                  isTrue={eachItem.id === activeFeature}
-                />
-              ))}
-            </FeaturesSection>
+            <>
+              <Header />
+              <Container bgColor={isDarkModeOn} data-testid="home">
+                <SideBar />
+                <HomeContentSection bgColor={isDarkModeOn}>
+                  {this.renderPremiumSubscription()}
+                  {this.renderVideos()}
+                </HomeContentSection>
+              </Container>
+            </>
           )
         }}
       </WatchAppContext.Consumer>
-    )
-  }
-
-  render() {
-    return (
-      <>
-        <Header />
-        <Container>
-          {this.renderSidebarFeatures()}
-          <HomeContentSection>
-            <h1>Home content</h1>
-          </HomeContentSection>
-        </Container>
-      </>
     )
   }
 }
