@@ -25,7 +25,7 @@ const TrendingVideoItem = props => {
       {value => {
         const {isDarkModeOn} = value
         const titleColor = isDarkModeOn ? '#cccccc' : '#383838'
-        const viewsColor = isDarkModeOn ? '#94a3b8' : ''
+        const viewsColor = isDarkModeOn ? '#94a3b8' : '#606060'
         return (
           <TrendingLink to={`/videos/${id}`}>
             <Container>

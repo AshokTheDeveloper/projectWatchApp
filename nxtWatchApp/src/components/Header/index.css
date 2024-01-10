@@ -37,3 +37,9 @@
     color: #ffffff;
   }
 }
+
+.popup-container {
+  background-color: red;
+  height: 100vh;
+  width: 100%;
+}

@@ -2,8 +2,6 @@ import {Component} from 'react'
 
 import Cookies from 'js-cookie'
 
-import {BiLike, BiDislike, BiListPlus} from 'react-icons/bi'
-
 import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
@@ -20,8 +18,10 @@ import {
   VideoTitle,
   ViewsAndLikesContainer,
   ViewsContainer,
+  ViewsAndCountList,
   ViewsAndCount,
   LikesContainer,
+  LikesListItem,
   Button,
   HorizontalLine,
   ProfileAndSubscribersContainer,
@@ -31,6 +31,9 @@ import {
   Subscribers,
   VideoDescription,
   LoaderContainer,
+  LikeIcon,
+  DislikeIcon,
+  ListIcon,
 } from './styledComponents'
 
 import './index.css'
@@ -134,41 +137,51 @@ class VideoItemDetails extends Component {
                 <VideoTitle color={isDarkModeOn}>{title}</VideoTitle>
                 <ViewsAndLikesContainer>
                   <ViewsContainer>
-                    <ViewsAndCount color={isDarkModeOn}>
-                      {viewCount} Views
-                    </ViewsAndCount>
-                    <ViewsAndCount color={isDarkModeOn}>
-                      {publishedAt}
-                    </ViewsAndCount>
+                    <ViewsAndCountList>
+                      <ViewsAndCount color={isDarkModeOn}>
+                        {viewCount} Views
+                      </ViewsAndCount>
+                    </ViewsAndCountList>
+                    <ViewsAndCountList>
+                      <ViewsAndCount color={isDarkModeOn}>
+                        {publishedAt}
+                      </ViewsAndCount>
+                    </ViewsAndCountList>
                   </ViewsContainer>
                   <LikesContainer>
-                    <Button
-                      type="button"
-                      color={isDarkModeOn}
-                      onClick={this.onLikeVideo}
-                      liked={like}
-                    >
-                      <BiLike className="like-dislike-save" />
-                      Like
-                    </Button>
-                    <Button
-                      type="button"
-                      color={isDarkModeOn}
-                      onClick={this.onDisLikeVideo}
-                      liked={dislike}
-                    >
-                      <BiDislike className="like-dislike-save" />
-                      Dislike
-                    </Button>
-                    <Button
-                      type="button"
-                      color={isDarkModeOn}
-                      onClick={onClickSaveVideo}
-                      liked={saved}
-                    >
-                      <BiListPlus className="like-dislike-save" />
-                      Save
-                    </Button>
+                    <LikesListItem>
+                      <Button
+                        type="button"
+                        color={isDarkModeOn}
+                        onClick={this.onLikeVideo}
+                        liked={like}
+                      >
+                        <LikeIcon />
+                        Like
+                      </Button>
+                    </LikesListItem>
+                    <LikesListItem>
+                      <Button
+                        type="button"
+                        color={isDarkModeOn}
+                        onClick={this.onDisLikeVideo}
+                        liked={dislike}
+                      >
+                        <DislikeIcon />
+                        Dislike
+                      </Button>
+                    </LikesListItem>
+                    <LikesListItem>
+                      <Button
+                        type="button"
+                        color={isDarkModeOn}
+                        onClick={onClickSaveVideo}
+                        liked={saved}
+                      >
+                        <ListIcon />
+                        Save
+                      </Button>
+                    </LikesListItem>
                   </LikesContainer>
                 </ViewsAndLikesContainer>
                 <HorizontalLine color={isDarkModeOn} />

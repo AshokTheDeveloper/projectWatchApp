@@ -3,6 +3,7 @@ import {IoMoonSharp} from 'react-icons/io5'
 import {FiSun, FiLogOut} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import Cookies from 'js-cookie'
+import Popup from 'reactjs-popup'
 
 import WatchAppContext from '../../context/WatchAppContext'
 
@@ -18,6 +19,11 @@ import {
   ModeButton,
   MobileNavbarContainer,
   MobileLogoutButton,
+  PopupModal,
+  PopupText,
+  PopupButtonContainer,
+  PopupButton,
+  ModalContainer,
 } from './styledComponents'
 
 const Header = props => {
@@ -58,6 +64,8 @@ const Header = props => {
           ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
+        const PopupBgColor = isDarkModeOn ? '#cccccc' : '#ffffff'
+
         return (
           <Container bgColor={isDarkModeOn}>
             <Link to="/">
@@ -80,11 +88,44 @@ const Header = props => {
                 />
               </ListItem>
               <ListItem>
-                <LogoutButton type="button" onClick={onClickLogout}>
-                  Logout
-                </LogoutButton>
+                <Popup
+                  modal
+                  trigger={
+                    <LogoutButton type="button" onClick={onClickLogout}>
+                      Logout
+                    </LogoutButton>
+                  }
+                  className="popup-container"
+                >
+                  {close => (
+                    <ModalContainer>
+                      <PopupModal bgColor={PopupBgColor}>
+                        <PopupText>Are you sure you want to logout</PopupText>
+                        <PopupButtonContainer>
+                          <PopupButton
+                            type="button"
+                            onClick={() => close()}
+                            bgColor="transparent"
+                            color="#616e7c"
+                          >
+                            Cancel
+                          </PopupButton>
+                          <PopupButton
+                            type="button"
+                            onClick={onClickLogout}
+                            bgColor="#3b82f6"
+                            color="#ffffff"
+                          >
+                            Confirm
+                          </PopupButton>
+                        </PopupButtonContainer>
+                      </PopupModal>
+                    </ModalContainer>
+                  )}
+                </Popup>
               </ListItem>
             </UList>
+
             <MobileNavbarContainer>
               <ListItem>
                 <ModeButton type="button" onClick={changeTheme}>

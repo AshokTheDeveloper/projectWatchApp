@@ -88,3 +88,46 @@ export const MobileLogoutButton = Styled.button`
   outline: none;
   cursor: pointer;
 `
+export const ModalContainer = Styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #00000099;
+  height: 100vh;
+  width: 100vw;
+`
+
+export const PopupModal = Styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.bgColor};
+  padding: 24px;
+  border-radius: 14px;
+`
+export const PopupText = Styled.p`
+  font-family: 'Roboto';
+  margin-bottom: 16px;
+`
+export const PopupButtonContainer = Styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+
+export const PopupButton = Styled.button`
+  border: none;
+  background-color: ${props => props.bgColor};
+  color: ${props => props.color};
+  border: ${props => `1px solid ${props.color}`};
+  font-family: 'Roboto';
+  outline: none;
+  padding: 12px;
+  width: 80px;
+  margin: 8px;
+  cursor: pointer;
+  font-weight: 500;
+`

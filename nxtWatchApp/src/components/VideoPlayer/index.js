@@ -3,15 +3,15 @@ import ReactPlayer from 'react-player'
 import {Container} from './styledComponents'
 
 const VideoPlayer = props => {
-  const {videoUrl} = props
+  const {videoUrl, thumbnailUrl} = props
   return (
     <Container>
       <ReactPlayer
         url={videoUrl}
         controls
-        className="video-player"
+        poster={thumbnailUrl}
         width="100%"
-        height="90%"
+        height="100%"
       />
     </Container>
   )

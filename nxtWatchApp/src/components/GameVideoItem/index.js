@@ -15,7 +15,7 @@ const GamingVideoItem = props => {
     <WatchAppContext.Consumer>
       {value => {
         const {isDarkModeOn} = value
-        const titleColor = isDarkModeOn ? '#ffffff' : ''
+        const titleColor = isDarkModeOn ? '#ffffff' : '#313131'
         const viewsColor = isDarkModeOn ? '#94a3b8' : '#616e7c'
         return (
           <Container>

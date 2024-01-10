@@ -20,7 +20,7 @@ export const TrendTextContainer = Styled.div`
 export const Title = Styled.p`
   font-family: 'Roboto';
   font-size: 20px;
-  font-weight: 600px;
+  font-weight: 600;
   margin-bottom: 16px;
   color: ${props => props.color};
 `
