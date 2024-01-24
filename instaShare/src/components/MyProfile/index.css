@@ -1,0 +1,283 @@
+.my-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.my-profile-details-container {
+  display: flex;
+  align-items: center;
+  width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 33px;
+  margin-bottom: 64px;
+}
+
+.my-followers-container-mobile {
+  display: none;
+  margin: 0px;
+}
+
+.my-profile-pic {
+  width: 180px;
+  height: 180px;
+  border-radius: 90px;
+}
+
+@media (max-width: 576px) {
+  .my-profile-details-container {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0px;
+    padding: 24px;
+  }
+
+  .my-followers-container-mobile {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 24px;
+    width: 100%;
+    padding-left: 0px;
+  }
+
+  .mobile-post-followers-following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .my-profile-image-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .my-profile-pic {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.my-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 64px;
+}
+
+li {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.my-profile-username {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 32px;
+  margin-bottom: 24px;
+}
+
+.my-profile-username-mobile {
+  display: none;
+}
+
+.my-followers-container {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
+
+.post-highlight {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+}
+
+.follower-following-posts {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-right: 48px;
+  margin-bottom: 16px;
+}
+
+.my-user-id {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.my-user-bio {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@media (max-width: 576px) {
+  .my-details-container {
+    margin-left: 0px;
+  }
+
+  .my-profile-username {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+  }
+  .my-profile-username-mobile {
+    display: flex;
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+
+  .my-followers-container {
+    display: none;
+  }
+
+  .my-profile-username {
+    display: none;
+  }
+
+  .mobile {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+  }
+
+  .post-followers-following-mobile {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; /* 133.333% */
+  }
+
+  .my-user-id {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .my-user-bio {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+  }
+}
+
+.my-profile-stories-container {
+  list-style-type: none;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1040px;
+  margin-bottom: 32px;
+}
+
+.story-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
+  margin-right: 32px;
+  padding: 0px;
+}
+
+.my-story {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+}
+
+.my-post-bg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid #c6c6c8;
+  padding-top: 32px;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  margin-bottom: 32px;
+}
+
+.my-posts-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 1040px;
+  padding: 0px;
+}
+
+.my-posts-heading-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.post-college-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 32px;
+}
+
+.my-posts-heading {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.my-profile-loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

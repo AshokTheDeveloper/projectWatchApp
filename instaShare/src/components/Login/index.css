@@ -1,0 +1,145 @@
+.login-bg-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-image-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  margin-right: 82px;
+}
+
+.login-image {
+  width: 500px;
+}
+
+@media (max-width: 576px) {
+  .login-image-container {
+    display: none;
+  }
+}
+
+.input-container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 456px;
+  height: 458px;
+  border-radius: 8px;
+  background: #fefeff;
+  box-shadow: 0px 8px 40px 0px rgba(7, 7, 7, 0.08);
+}
+
+@media (max-width: 576px) {
+  .login-logo-container {
+    box-shadow: 0px 0px 0px 0px #ffffff;
+  }
+}
+
+.login-logo {
+  width: 82px;
+}
+
+@media (max-width: 576px) {
+  .login-logo {
+    width: 78px;
+    height: 40px;
+  }
+}
+
+.logo-name {
+  color: #262626;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  margin-bottom: 48px;
+}
+
+.input-and-label-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+label {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.12px;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 360px;
+  height: 40px;
+  border-radius: 2px;
+  background: #eee;
+  color: #262626;
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+
+@media (max-width: 576px) {
+  .input {
+    width: 312px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+}
+
+.login-button {
+  display: flex;
+  width: 360px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: #4094ef;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  .login-button {
+    width: 312px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+}
+
+.error-msg {
+  color: #ef4444;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

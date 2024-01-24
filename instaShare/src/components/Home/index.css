@@ -1,0 +1,132 @@
+.home-bg-container {
+  background: #fafafa;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.slider-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 576px) {
+  .slider-container {
+    width: 80%;
+  }
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.stories-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 32px;
+  height: 100px;
+}
+
+.stories-failure-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 200px;
+  margin-right: 200px;
+  border: 1px solid #dbdbdb;
+  height: 100px;
+  margin-top: 32px;
+}
+
+.story-try-again-button {
+  padding: 4px 16px;
+  border-radius: 8px;
+  background: #4094ef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  background-color: #fafafa;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+  width: 80%;
+}
+
+@media (max-width: 576px) {
+  .post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #c6c6c8;
+    width: 100%;
+  }
+}
+
+.posts-loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 200px;
+  margin-right: 200px;
+  height: 100vh;
+}
+
+.posts-failure-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 200px;
+  margin-right: 200px;
+  height: 100vh;
+}
+
+.home-failure-image {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.home-failure-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+.home-failure-try-again-button {
+  display: flex;
+  padding: 8px 24px;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  background: #4094ef;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  cursor: pointer;
+}

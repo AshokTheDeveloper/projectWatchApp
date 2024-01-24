@@ -1,0 +1,139 @@
+.post-item {
+  list-style-type: none;
+  border: 1px solid #dbdbdb;
+  background-color: #ffffff;
+  border-radius: 8px 8px 8px 8px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .post-item {
+    border-radius: 0px;
+    margin-bottom: 0px;
+    border: none;
+    width: 100%;
+  }
+}
+
+.profile-and-username {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 24px;
+}
+
+.profile-bg-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 48px;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(to left, #e20337, #c60188, #7700c3, #7700c3) border-box;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 28px;
+}
+.user-name {
+  color: #262626;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 16px;
+}
+
+.post-image-container {
+  border: 1px solid #dbdbdb;
+  border-top: none;
+  border-bottom: none;
+  width: 100%;
+}
+
+.post-image {
+  width: 100%;
+  height: 600px;
+  margin: 0px;
+}
+
+@media (max-width: 576px) {
+  .post-image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  .post-image {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+.post-description-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 16px 24px;
+}
+
+.likes-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.post-icon-button {
+  background: none;
+  border: none;
+  outline: none;
+  margin-right: 16px;
+  padding: 0px;
+}
+
+.likes-count {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 8px;
+}
+
+.caption {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 8px;
+}
+
+.created-time {
+  color: #989898;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 18px;
+}
+
+.post-links {
+  text-decoration: none;
+}

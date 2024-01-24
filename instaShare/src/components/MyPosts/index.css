@@ -1,0 +1,11 @@
+.my-post-item {
+  list-style-type: none;
+  width: 320px;
+  height: 330px;
+  flex-shrink: 0;
+}
+
+.my-post-image {
+  width: 100%;
+  height: 330px;
+}
