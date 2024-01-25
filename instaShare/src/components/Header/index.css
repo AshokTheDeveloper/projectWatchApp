@@ -8,8 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
-  max-width: 1100px;
+  width: 1040px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -21,7 +20,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 24px;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 }
 
@@ -188,10 +188,8 @@
 
   .mobile-nav-links-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    width: 80%;
-
   }
 
   .mobile-nav-link {
@@ -205,7 +203,10 @@
     outline: none;
     border: none;
     cursor: pointer;
-    margin-right: 16px;
+  }
+
+  .mobile-item {
+    padding-right: 8px;
   }
 
   .mobile-search-button {
@@ -231,7 +232,7 @@
   }
 
   .mobile-logout-button {
-    padding: 8px 24px;
+    padding: 6px 18px;
     border-radius: 4px;
     background: #4094ef;
     color: #ffffff;
@@ -239,4 +240,11 @@
     outline: none;
     cursor: pointer;
   }
+}
+
+.logo-button {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
 }

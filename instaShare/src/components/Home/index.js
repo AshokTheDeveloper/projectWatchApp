@@ -12,6 +12,10 @@ import StoriesItem from '../StoriesItem'
 
 import Post from '../Post'
 
+import Searched from '../Searched'
+
+import InstaShareContext from '../../context/InstaShareContext'
+
 import './index.css'
 
 const apiStatusConstants = {
@@ -26,6 +30,7 @@ class Home extends Component {
     storiesData: [],
     postsData: [],
     apiStatus: apiStatusConstants.initial,
+    storyApiStatus: apiStatusConstants.initial,
   }
 
   componentDidMount() {
@@ -33,8 +38,10 @@ class Home extends Component {
     this.getPosts()
   }
 
+  // Get Stories API
+
   getStories = async () => {
-    this.setState({apiStatus: apiStatusConstants.inProgress})
+    this.setState({storyApiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/insta-share/stories'
     const options = {
@@ -53,10 +60,10 @@ class Home extends Component {
       }))
       this.setState({
         storiesData: updatedData,
-        apiStatus: apiStatusConstants.success,
+        storyApiStatus: apiStatusConstants.success,
       })
     } else {
-      this.setState({apiStatus: apiStatusConstants.failure})
+      this.setState({storyApiStatus: apiStatusConstants.failure})
     }
   }
 
@@ -96,7 +103,7 @@ class Home extends Component {
       <div className="slider-container">
         <Slider {...settings}>
           {storiesData.map(eachStory => (
-            <StoriesItem key={eachStory.storyId} storyDetails={eachStory} />
+            <StoriesItem key={eachStory.userId} storyDetails={eachStory} />
           ))}
         </Slider>
       </div>
@@ -108,27 +115,35 @@ class Home extends Component {
   }
 
   renderStoriesLoadingView = () => (
-    <div className="stories-loader-container" data-testid="loader">
+    <div className="stories-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={30} height={30} />
     </div>
   )
 
   renderStoriesFailureView = () => (
     <div className="stories-failure-container">
+      <img
+        src="https://res.cloudinary.com/daecqm1j8/image/upload/v1705918903/alert-triangle_vlifhx.svg"
+        alt="failure view"
+        className="story-failure-image"
+      />
+      <p className="story-failure-text">
+        Something went wrong. Please try again
+      </p>
       <button
         type="button"
         className="story-try-again-button"
         onClick={this.onClickStoryTryAgain}
       >
-        Try Again
+        Try again
       </button>
     </div>
   )
 
   renderStoriesResultView = () => {
-    const {apiStatus} = this.state
-    // const apiStatus = apiStatusConstants.failure
-    switch (apiStatus) {
+    const {storyApiStatus} = this.state
+    // const storyApiStatus = apiStatusConstants.failure
+    switch (storyApiStatus) {
       case apiStatusConstants.success:
         return this.renderStories()
       case apiStatusConstants.failure:
@@ -139,6 +154,8 @@ class Home extends Component {
         return null
     }
   }
+
+  // Get Post API
 
   getPosts = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
@@ -172,7 +189,6 @@ class Home extends Component {
         userId: eachItem.user_id,
         userName: eachItem.user_name,
       }))
-      console.log(updatedData)
       this.setState({
         postsData: updatedData,
         apiStatus: apiStatusConstants.success,
@@ -182,19 +198,68 @@ class Home extends Component {
     }
   }
 
+  onClickTryAgainPost = () => {
+    this.getPosts()
+  }
+
+  // liked post api function
+  onClickLikedPost = async (postId, likeStatus) => {
+    const {postsData} = this.state
+    const likedStatusDetails = {
+      like_status: likeStatus,
+    }
+    const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(likedStatusDetails),
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    let userPostsData = postsData
+    userPostsData = userPostsData.map(eachObject => {
+      if (eachObject.postId === postId && likeStatus === true) {
+        return {
+          ...eachObject,
+          message: data.message,
+          likesCount: eachObject.likesCount + 1,
+        }
+      }
+      if (eachObject.postId === postId && likeStatus === false) {
+        return {
+          ...eachObject,
+          message: data.message,
+          likesCount: eachObject.likesCount - 1,
+        }
+      }
+
+      return eachObject
+    })
+    this.setState({postsData: userPostsData})
+  }
+
   renderPosts = () => {
     const {postsData} = this.state
     return (
-      <ul className="post-container">
-        {postsData.map(eachItem => (
-          <Post key={eachItem.postId} post={eachItem} />
-        ))}
-      </ul>
+      <>
+        <ul className="post-container">
+          {postsData.map(eachItem => (
+            <Post
+              key={eachItem.postId}
+              post={eachItem}
+              onLikedPost={this.onClickLikedPost}
+            />
+          ))}
+        </ul>
+      </>
     )
   }
 
   renderPostsLoading = () => (
-    <div className="posts-loader-container" data-testid="loader">
+    <div className="posts-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
     </div>
   )
@@ -203,14 +268,18 @@ class Home extends Component {
     <div className="posts-failure-container">
       <img
         src="https://res.cloudinary.com/daecqm1j8/image/upload/v1705918903/alert-triangle_vlifhx.svg"
-        alt="home failure"
+        alt="failure view"
         className="home-failure-image"
       />
-      <h1 className="home-failure-text">
+      <p className="home-failure-text">
         Something went wrong. Please try again
-      </h1>
-      <button type="button" className="home-failure-try-again-button">
-        Try Again
+      </p>
+      <button
+        type="button"
+        className="home-failure-try-again-button"
+        onClick={this.onClickTryAgainPost}
+      >
+        Try again
       </button>
     </div>
   )
@@ -230,14 +299,30 @@ class Home extends Component {
     }
   }
 
+  renderFinalView = () => (
+    <>
+      {this.renderStoriesResultView()}
+      {this.renderPostsResult()}
+    </>
+  )
+
+  renderResult = () => (
+    <InstaShareContext.Consumer>
+      {value => {
+        const {searchedData, status, isSearchButtonClicked} = value
+        if (isSearchButtonClicked === true) {
+          return <Searched status={status} searchedData={searchedData} />
+        }
+        return this.renderFinalView()
+      }}
+    </InstaShareContext.Consumer>
+  )
+
   render() {
     return (
       <>
         <Header />
-        <div className="home-bg-container">
-          {this.renderStoriesResultView()}
-          {this.renderPostsResult()}
-        </div>
+        <div className="home-bg-container">{this.renderResult()}</div>
       </>
     )
   }

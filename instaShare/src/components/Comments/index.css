@@ -1,0 +1,27 @@
+.comments-item {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.comment-user-name {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.1px;
+  margin-right: 4px;
+}
+
+.comment-text {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.07px;
+}
