@@ -20,6 +20,8 @@ class Header extends Component {
     searchInput: '',
   }
 
+  onClickSearchButton = () => {}
+
   onClickLogout = () => {
     Cookies.remove('jwt_token')
     const {history} = this.props
@@ -88,6 +90,7 @@ class Header extends Component {
                         type="button"
                         aria-label="search button"
                         className="search-button"
+                        // --------------------TEST ID HERE ------------------
                         testid="searchIcon"
                         onClick={onClickSearchIcon}
                       >
@@ -142,7 +145,8 @@ class Header extends Component {
                         type="button"
                         aria-label="search button"
                         className="mobile-nav-link"
-                        data-testid="searchIcon"
+                        // --------------------TEST ID HERE ------------------
+                        testid="searchIcon"
                       >
                         Search
                       </button>

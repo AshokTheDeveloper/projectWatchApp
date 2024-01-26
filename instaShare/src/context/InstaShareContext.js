@@ -8,6 +8,10 @@ const InstaShareContext = React.createContext({
   searchedData: [],
   isDataThere: false,
   returnHome: () => {},
+
+  setSuccess: false,
+  setLoading: false,
+  setFailure: false,
 })
 
 export default InstaShareContext

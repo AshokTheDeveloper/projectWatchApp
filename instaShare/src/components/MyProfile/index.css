@@ -16,6 +16,147 @@
   margin-bottom: 64px;
 }
 
+/* --------------------newly added ---------------------------- */
+
+.my-profile-details-large-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.my-profile-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 64px;
+}
+
+.my-profile-user-name {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 32px;
+  margin-bottom: 24px;
+}
+
+.followers-count-container {
+  padding: 0px;
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.follower-items {
+  margin-right: 48px;
+}
+
+.post-count,
+.follower-count,
+.following-count {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.highlight-post-follower-following {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-right: 8px;
+}
+
+.my-profile-user-id {
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+
+.my-profile-user-bio {
+  width: 675px;
+  color: #262626;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* FOR MOBILE */
+.my-profile-details-mobile-container {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  /* .my-profile-details-large-container {
+    display: none;
+  } */
+
+  .my-profile-details-mobile-container {
+    width: 90%;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-mobile-details-container {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+  }
+
+  .my-profile-mobile-post-followers-following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 24px;
+  }
+
+  .mobile-followers,
+  .mobile-post,
+  .mobile-following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #262626;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  .my-profile-mobile-user-id {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .my-profile-mobile-user-bio {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+}
+
+/* -----------------------END----------------------------*/
+
 .my-followers-container-mobile {
   display: none;
   margin: 0px;
@@ -120,7 +261,9 @@ li {
   margin-bottom: 16px;
 }
 
-.followers, .following, .posts {
+.followers,
+.following,
+.posts {
   color: #262626;
   font-family: Roboto;
   font-size: 16px;

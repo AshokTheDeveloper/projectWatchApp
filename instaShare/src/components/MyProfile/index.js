@@ -24,8 +24,6 @@ const apiStatusConstants = {
 class MyProfile extends Component {
   state = {
     profileData: [],
-    storiesData: [],
-    myProfilePosts: [],
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -43,7 +41,9 @@ class MyProfile extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
+
     const response = await fetch(apiUrl, options)
+
     if (response.ok) {
       const data = await response.json()
       const updatedData = {
@@ -59,10 +59,8 @@ class MyProfile extends Component {
         userName: data.profile.user_name,
       }
       this.setState({
-        profileData: updatedData,
-        storiesData: updatedData.stories,
-        myProfilePosts: updatedData.posts,
         apiStatus: apiStatusConstants.success,
+        profileData: updatedData,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
@@ -81,72 +79,100 @@ class MyProfile extends Component {
       userBio,
     } = profileData
     return (
-      <div className="my-profile-details-container">
-        <h1 className="my-profile-username-mobile">{userName}</h1>
-        <div className="my-profile-image-container">
-          <img src={profilePic} alt="my profile" className="my-profile-pic" />
-          <ul className="my-followers-container-mobile">
-            <li className="mobile-post-followers-following">
-              <p>
-                <span className="post-highlight mobile">{postsCount}</span>
-                posts
-              </p>
-            </li>
-            <li className="mobile-post-followers-following">
-              <p>
-                <span className="post-highlight mobile">{followersCount}</span>
-                followers
-              </p>
-            </li>
-            <li className="mobile-post-followers-following">
-              <p>
-                <span className="post-highlight mobile">{followingCount}</span>
-                following
-              </p>
-            </li>
-          </ul>
-        </div>
-        <div className="my-details-container">
-          <h1 className="my-profile-username">{userName}</h1>
-          <ul className="my-followers-container">
-            <li className="followers-container">
-              <p>
-                <span className="post-highlight">{postsCount}</span>
-                posts
-              </p>
-            </li>
-            <li className="followers-container">
-              <p>
-                <span className="post-highlight">{followersCount}</span>
-                followers
-              </p>
-            </li>
-            <li className="followers-container">
-              <p>
-                <span className="post-highlight">{followingCount}</span>
-                following
-              </p>
-            </li>
-          </ul>
-          <div className="user-bio-container">
-            <p className="my-user-id">{userId}</p>
-            <p className="my-user-bio">{userBio}</p>
+      <>
+        <div className="my-profile-details-container">
+          <div className="my-profile-details-large-container">
+            <div className="profile-image-container">
+              <img
+                src={profilePic}
+                alt="my profile"
+                className="my-profile-pic"
+              />
+            </div>
+            <div className="my-profile-details">
+              <h1 className="my-profile-user-name">{userName}</h1>
+              <ul className="followers-count-container">
+                <li className="follower-items">
+                  <p className="post-count">
+                    <span className="highlight-post-follower-following">
+                      {postsCount}
+                    </span>
+                    posts
+                  </p>
+                </li>
+                <li className="follower-items">
+                  <p className="follower-count">
+                    <span className="highlight-post-follower-following">
+                      {followersCount}
+                    </span>
+                    followers
+                  </p>
+                </li>
+                <li className="follower-items">
+                  <p className="following-count">
+                    <span className="highlight-post-follower-following">
+                      {followingCount}
+                    </span>
+                    following
+                  </p>
+                </li>
+              </ul>
+              <div>
+                <p className="my-profile-user-id">{userId}</p>
+                <p className="my-profile-user-bio">{userBio}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* <div className="my-profile-details-mobile-container">
+          <h1 className="my-profile-username-mobile">{userName}</h1>
+          <div className="profile-mobile-details-container">
+            <img src={profilePic} alt="my profile" className="my-profile-pic" />
+            <ul className="my-followers-container-mobile">
+              <li className="my-profile-mobile-post-followers-following">
+                <p className="mobile-post">
+                  <span className="post-highlight mobile">{postsCount}</span>
+                  posts
+                </p>
+              </li>
+              <li className="my-profile-mobile-post-followers-following">
+                <p className="mobile-followers">
+                  <span className="post-highlight mobile">
+                    {followersCount}
+                  </span>
+                  followers
+                </p>
+              </li>
+              <li className="my-profile-mobile-post-followers-following">
+                <p className="mobile-following">
+                  <span className="post-highlight mobile">
+                    {followingCount}
+                  </span>
+                  following
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="my-profile-mobile-user-id">{userId}</p>
+            <p className="my-profile-mobile-user-bio">{userBio}</p>
+          </div>
+        </div> */}
+      </>
     )
   }
 
   renderMyProfileStories = () => {
-    const {storiesData, myProfilePosts} = this.state
-    const lengthOfPosts = myProfilePosts.length
+    const {profileData} = this.state
+    const lengthOfPosts = profileData.stories.length
     return (
       <>
         {lengthOfPosts === 0 ? (
           ''
         ) : (
           <ul className="my-profile-stories-container">
-            {storiesData.map(eachStory => (
+            {profileData.stories.map(eachStory => (
               <li className="my-story-image-container" key={eachStory.id}>
                 <img
                   src={eachStory.image}
@@ -162,8 +188,8 @@ class MyProfile extends Component {
   }
 
   renderMyPosts = () => {
-    const {myProfilePosts} = this.state
-    const lengthOfPosts = myProfilePosts.length
+    const {profileData} = this.state
+    const lengthOfPosts = profileData.posts.length
     return (
       <>
         {lengthOfPosts === 0 ? (
@@ -175,7 +201,7 @@ class MyProfile extends Component {
               <h1 className="my-posts-heading">Posts</h1>
             </div>
             <ul className="my-profile-posts-container">
-              {myProfilePosts.map(eachItem => (
+              {profileData.posts.map(eachItem => (
                 <MyPosts key={eachItem.id} postDetails={eachItem} />
               ))}
             </ul>
@@ -228,6 +254,8 @@ class MyProfile extends Component {
     </div>
   )
 
+  // --------------------TEST ID HERE ------------------
+
   renderMyProfileLoadingView = () => (
     <div className="my-profile-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
@@ -236,7 +264,6 @@ class MyProfile extends Component {
 
   renderResultView = () => {
     const {apiStatus} = this.state
-    // const apiStatus = apiStatusConstants.failure
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderMyProfilePosts()

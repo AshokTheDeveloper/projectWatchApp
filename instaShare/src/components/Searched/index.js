@@ -1,15 +1,14 @@
 import {Component} from 'react'
 
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 import Loader from 'react-loader-spinner'
 
 import Post from '../Post'
 
-import './index.css'
 import InstaShareContext from '../../context/InstaShareContext'
 
-// import InstaShareContext from '../../context/InstaShareContext'
+import './index.css'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -24,7 +23,48 @@ class Searched extends Component {
     this.state = {
       apiStatus: props.status,
       searchedResultData: props.searchedData,
+      success: props.setSuccess,
+      failure: props.setFailure,
+      loading: props.setLoading,
     }
+  }
+
+  onClickLikedPost = async (postId, likeStatus) => {
+    const {searchedResultData} = this.state
+    const likedStatusDetails = {
+      like_status: likeStatus,
+    }
+    const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(likedStatusDetails),
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    let userPostsData = searchedResultData
+    userPostsData = userPostsData.map(eachObject => {
+      if (eachObject.postId === postId && likeStatus === true) {
+        return {
+          ...eachObject,
+          message: data.message,
+          likesCount: eachObject.likesCount + 1,
+        }
+      }
+      if (eachObject.postId === postId && likeStatus === false) {
+        return {
+          ...eachObject,
+          message: data.message,
+          likesCount: eachObject.likesCount - 1,
+        }
+      }
+
+      return eachObject
+    })
+    this.setState({searchedResultData: userPostsData})
   }
 
   renderSearchedPostsList = () => {
@@ -37,7 +77,11 @@ class Searched extends Component {
         </div>
         <ul className="post-container">
           {searchedResultData.map(eachItem => (
-            <Post key={eachItem.postId} post={eachItem} />
+            <Post
+              key={eachItem.postId}
+              post={eachItem}
+              onLikedPost={this.onClickLikedPost}
+            />
           ))}
         </ul>
       </div>
@@ -64,8 +108,10 @@ class Searched extends Component {
     </div>
   )
 
+  // --------------------TEST ID HERE ------------------
+
   renderSearchedLoadingView = () => (
-    <div className="posts-loader-container" data-testid="loader">
+    <div className="posts-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
     </div>
   )
@@ -111,6 +157,10 @@ class Searched extends Component {
   )
 
   render() {
+    const {success, failure, loading} = this.state
+    console.log('SUCCESS', success)
+    console.log('FAILURE: ', failure)
+    console.log('LOADING: ', loading)
     return <>{this.renderResult()}</>
   }
 }

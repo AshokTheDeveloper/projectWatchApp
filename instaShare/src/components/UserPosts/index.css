@@ -1,0 +1,28 @@
+.user-post-item {
+  list-style-type: none;
+  width: 320px;
+  height: 330px;
+  margin-right: 25px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 576px) {
+  .user-post-item {
+    width: 118px;
+    height: 118px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+  }
+}
+
+.user-post-image {
+  width: 100%;
+  height: 330px;
+}
+
+@media (max-width: 576px) {
+  .user-post-image {
+    width: 118px;
+    height: 118px;
+  }
+}

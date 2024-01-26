@@ -32,9 +32,14 @@ class App extends Component {
     status: apiStatusConstants.initial,
     searchedData: [],
     isSearchButtonClicked: false,
+    setSuccess: false,
+    setLoading: false,
+    setFailure: false,
   }
 
   onClickSearch = async searchInput => {
+    this.setState({setLoading: true})
+
     this.setState({status: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
@@ -67,12 +72,14 @@ class App extends Component {
       this.setState({
         searchedData: updatedData,
         status: apiStatusConstants.success,
+        setLoading: false,
+        setSuccess: true,
       })
       if (searchInput !== '') {
         this.setState({isSearchButtonClicked: true})
       }
     } else {
-      this.setState({status: apiStatusConstants.failure})
+      this.setState({status: apiStatusConstants.failure, setFailure: true})
     }
   }
 
@@ -86,6 +93,9 @@ class App extends Component {
       searchedData,
       status,
       isSearchButtonClicked,
+      setSuccess,
+      setLoading,
+      setFailure,
     } = this.state
     return (
       <InstaShareContext.Provider
@@ -94,6 +104,9 @@ class App extends Component {
           searchedData,
           status,
           isSearchButtonClicked,
+          setSuccess,
+          setLoading,
+          setFailure,
           onClickSearch: this.onClickSearch,
           returnHome: this.onClickLogo,
         }}

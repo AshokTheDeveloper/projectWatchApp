@@ -71,6 +71,7 @@ class Post extends Component {
                   <button
                     type="button"
                     aria-label="heart icon"
+                    // -------------------TEST ID HERE ------------------
                     testid="unLikeIcon"
                     className="post-icon-button"
                     onClick={onClickLiked}
@@ -83,6 +84,7 @@ class Post extends Component {
                   <button
                     type="button"
                     aria-label="heart icon"
+                    // --------------------TEST ID HERE ------------------
                     testid="likeIcon"
                     className="post-icon-button"
                     onClick={onClickUnLiked}

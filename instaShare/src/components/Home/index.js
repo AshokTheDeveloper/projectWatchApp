@@ -114,6 +114,8 @@ class Home extends Component {
     this.getStories()
   }
 
+  // --------------------TEST ID HERE ------------------
+
   renderStoriesLoadingView = () => (
     <div className="stories-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={30} height={30} />
@@ -258,6 +260,8 @@ class Home extends Component {
     )
   }
 
+  // --------------------TEST ID HERE ------------------
+
   renderPostsLoading = () => (
     <div className="posts-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
@@ -309,9 +313,24 @@ class Home extends Component {
   renderResult = () => (
     <InstaShareContext.Consumer>
       {value => {
-        const {searchedData, status, isSearchButtonClicked} = value
+        const {
+          searchedData,
+          status,
+          isSearchButtonClicked,
+          setSuccess,
+          setLoading,
+          setFailure,
+        } = value
         if (isSearchButtonClicked === true) {
-          return <Searched status={status} searchedData={searchedData} />
+          return (
+            <Searched
+              status={status}
+              searchedData={searchedData}
+              setSuccess={setSuccess}
+              setFailure={setFailure}
+              setLoading={setLoading}
+            />
+          )
         }
         return this.renderFinalView()
       }}
