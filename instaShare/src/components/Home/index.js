@@ -313,24 +313,9 @@ class Home extends Component {
   renderResult = () => (
     <InstaShareContext.Consumer>
       {value => {
-        const {
-          searchedData,
-          status,
-          isSearchButtonClicked,
-          setSuccess,
-          setLoading,
-          setFailure,
-        } = value
+        const {isSearchButtonClicked, searchInput} = value
         if (isSearchButtonClicked === true) {
-          return (
-            <Searched
-              status={status}
-              searchedData={searchedData}
-              setSuccess={setSuccess}
-              setFailure={setFailure}
-              setLoading={setLoading}
-            />
-          )
+          return <Searched searchInput={searchInput} />
         }
         return this.renderFinalView()
       }}

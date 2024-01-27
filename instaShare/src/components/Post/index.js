@@ -58,11 +58,7 @@ class Post extends Component {
             </Link>
           </div>
           <div className="post-image-container">
-            <img
-              src={postDetails.imageUrl}
-              alt="user post"
-              className="post-image"
-            />
+            <img src={postDetails.imageUrl} alt="post" className="post-image" />
           </div>
           <div className="post-description-container">
             <ul className="likes-container">

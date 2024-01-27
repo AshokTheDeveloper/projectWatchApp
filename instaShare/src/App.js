@@ -2,8 +2,6 @@ import {Component} from 'react'
 
 import {Switch, Route, Redirect} from 'react-router-dom'
 
-import Cookies from 'js-cookie'
-
 import Login from './components/Login'
 
 import Home from './components/Home'
@@ -20,66 +18,16 @@ import InstaShareContext from './context/InstaShareContext'
 
 import './App.css'
 
-const apiStatusConstants = {
-  initial: 'INITIAL',
-  success: 'SUCCESS',
-  failure: 'FAILURE',
-  inProgress: 'IN_PROGRESS',
-}
-
 class App extends Component {
   state = {
-    status: apiStatusConstants.initial,
-    searchedData: [],
     isSearchButtonClicked: false,
-    setSuccess: false,
-    setLoading: false,
-    setFailure: false,
+    searchInput: '',
   }
 
-  onClickSearch = async searchInput => {
-    this.setState({setLoading: true})
-
-    this.setState({status: apiStatusConstants.inProgress})
-    const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    }
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
-      const data = await response.json()
-      const updatedData = data.posts.map(eachPost => ({
-        postId: eachPost.post_id,
-        userId: eachPost.user_id,
-        userName: eachPost.user_name,
-        profilePic: eachPost.profile_pic,
-        postDetails: {
-          imageUrl: eachPost.post_details.image_url,
-          caption: eachPost.post_details.caption,
-        },
-        likesCount: eachPost.likes_count,
-        comments: eachPost.comments.map(eachItem => ({
-          userId: eachItem.user_id,
-          userName: eachItem.user_name,
-          comment: eachItem.comment,
-        })),
-        createdAt: eachPost.created_at,
-      }))
-      this.setState({
-        searchedData: updatedData,
-        status: apiStatusConstants.success,
-        setLoading: false,
-        setSuccess: true,
-      })
-      if (searchInput !== '') {
-        this.setState({isSearchButtonClicked: true})
-      }
-    } else {
-      this.setState({status: apiStatusConstants.failure, setFailure: true})
+  onClickSearch = async input => {
+    if (input !== '') {
+      this.setState({isSearchButtonClicked: true})
+      this.setState({searchInput: input})
     }
   }
 
@@ -88,25 +36,12 @@ class App extends Component {
   }
 
   render() {
-    const {
-      searchInput,
-      searchedData,
-      status,
-      isSearchButtonClicked,
-      setSuccess,
-      setLoading,
-      setFailure,
-    } = this.state
+    const {searchInput, isSearchButtonClicked} = this.state
     return (
       <InstaShareContext.Provider
         value={{
           searchInput,
-          searchedData,
-          status,
           isSearchButtonClicked,
-          setSuccess,
-          setLoading,
-          setFailure,
           onClickSearch: this.onClickSearch,
           returnHome: this.onClickLogo,
         }}

@@ -6,8 +6,6 @@ import Loader from 'react-loader-spinner'
 
 import Post from '../Post'
 
-import InstaShareContext from '../../context/InstaShareContext'
-
 import './index.css'
 
 const apiStatusConstants = {
@@ -21,16 +19,59 @@ class Searched extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      apiStatus: props.status,
-      searchedResultData: props.searchedData,
-      success: props.setSuccess,
-      failure: props.setFailure,
-      loading: props.setLoading,
+      searchInput: props.searchInput,
+      apiStatus: apiStatusConstants.initial,
+      searchResults: [],
+    }
+  }
+
+  componentDidMount() {
+    this.getSearchedPosts()
+  }
+
+  getSearchedPosts = async () => {
+    const {searchInput} = this.state
+
+    this.setState({apiStatus: apiStatusConstants.inProgress})
+    const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response = await fetch(apiUrl, options)
+    if (response.ok) {
+      const data = await response.json()
+      const updatedData = data.posts.map(eachPost => ({
+        postId: eachPost.post_id,
+        userId: eachPost.user_id,
+        userName: eachPost.user_name,
+        profilePic: eachPost.profile_pic,
+        postDetails: {
+          imageUrl: eachPost.post_details.image_url,
+          caption: eachPost.post_details.caption,
+        },
+        likesCount: eachPost.likes_count,
+        comments: eachPost.comments.map(eachItem => ({
+          userId: eachItem.user_id,
+          userName: eachItem.user_name,
+          comment: eachItem.comment,
+        })),
+        createdAt: eachPost.created_at,
+      }))
+      this.setState({
+        searchResults: updatedData,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({apiStatus: apiStatusConstants.failure})
     }
   }
 
   onClickLikedPost = async (postId, likeStatus) => {
-    const {searchedResultData} = this.state
+    const {searchResults} = this.state
     const likedStatusDetails = {
       like_status: likeStatus,
     }
@@ -45,7 +86,7 @@ class Searched extends Component {
     }
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-    let userPostsData = searchedResultData
+    let userPostsData = searchResults
     userPostsData = userPostsData.map(eachObject => {
       if (eachObject.postId === postId && likeStatus === true) {
         return {
@@ -64,11 +105,11 @@ class Searched extends Component {
 
       return eachObject
     })
-    this.setState({searchedResultData: userPostsData})
+    this.setState({searchResults: userPostsData})
   }
 
   renderSearchedPostsList = () => {
-    const {searchedResultData} = this.state
+    const {searchResults} = this.state
 
     return (
       <div className="searched-posts-bg-container">
@@ -76,7 +117,7 @@ class Searched extends Component {
           <h1 className="searched-posts-heading">Search Results</h1>
         </div>
         <ul className="post-container">
-          {searchedResultData.map(eachItem => (
+          {searchResults.map(eachItem => (
             <Post
               key={eachItem.postId}
               post={eachItem}
@@ -88,30 +129,30 @@ class Searched extends Component {
     )
   }
 
-  renderSearchedFailureView = () => (
-    <div className="posts-failure-container">
+  renderFailureView = () => (
+    <div className="searched-posts-failure-container">
       <img
-        src="https://res.cloudinary.com/daecqm1j8/image/upload/v1705918903/alert-triangle_vlifhx.svg"
-        alt="home failure"
-        className="home-failure-image"
+        src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706111954/Group_7737_v1esnf.svg"
+        alt="failure view"
+        className="searched-failure-image"
       />
-      <h1 className="home-failure-text">
+      <p className="searched-posts-failure-text">
         Something went wrong. Please try again
-      </h1>
+      </p>
       <button
         type="button"
-        className="home-failure-try-again-button"
-        onClick={this.onClickTryAgainPost}
+        className="searched-failure-try-again-button"
+        onClick={this.getSearchedPosts}
       >
-        Retry
+        Try again
       </button>
     </div>
   )
 
   // --------------------TEST ID HERE ------------------
 
-  renderSearchedLoadingView = () => (
-    <div className="posts-loader-container" testid="loader">
+  renderLoadingView = () => (
+    <div className="searched-posts-loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
     </div>
   )
@@ -132,35 +173,31 @@ class Searched extends Component {
 
   renderResultView = () => {
     const {apiStatus} = this.state
+    // const apiStatus = apiStatusConstants.failure
     switch (apiStatus) {
       case apiStatusConstants.success:
         return this.renderSearchedPostsList()
       case apiStatusConstants.failure:
-        return this.renderSearchedFailureView()
+        return this.renderFailureView()
       case apiStatusConstants.inProgress:
-        return this.renderSearchedLoadingView()
+        return this.renderLoadingView()
       default:
         return null
     }
   }
 
-  renderResult = () => (
-    <InstaShareContext.Consumer>
-      {value => {
-        const {searchedData} = value
-        if (searchedData.length === 0) {
-          return this.renderNoSearchedResultsView()
-        }
-        return this.renderResultView()
-      }}
-    </InstaShareContext.Consumer>
-  )
+  renderResult = () => {
+    const {searchResults, apiStatus} = this.state
+    if (
+      searchResults.length === 0 &&
+      apiStatus === apiStatusConstants.success
+    ) {
+      return this.renderNoSearchedResultsView()
+    }
+    return this.renderResultView()
+  }
 
   render() {
-    const {success, failure, loading} = this.state
-    console.log('SUCCESS', success)
-    console.log('FAILURE: ', failure)
-    console.log('LOADING: ', loading)
     return <>{this.renderResult()}</>
   }
 }
