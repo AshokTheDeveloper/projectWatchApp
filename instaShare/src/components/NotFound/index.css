@@ -7,6 +7,10 @@
   padding: 32px;
 }
 
+.not-found-dark-container {
+  background-color: #272727;
+}
+
 .not-found-image {
   display: flex;
   flex-direction: column;
@@ -35,6 +39,10 @@
   margin-bottom: 16px;
 }
 
+.not-found-dark-heading {
+  color: #ffffff;
+}
+
 @media (max-width: 576px) {
   .not-found-text {
     color: #262626;
@@ -56,6 +64,10 @@
   font-weight: 400;
   line-height: 32px;
   margin-bottom: 32px;
+}
+
+.not-found-dark-description {
+  color: #ffffff;
 }
 
 @media (max-width: 576px) {

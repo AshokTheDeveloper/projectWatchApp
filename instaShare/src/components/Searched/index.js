@@ -152,7 +152,7 @@ class Searched extends Component {
   // --------------------TEST ID HERE ------------------
 
   renderLoadingView = () => (
-    <div className="searched-posts-loader-container" testid="loader">
+    <div className="searched-posts-loader-container" data-testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
     </div>
   )

@@ -22,28 +22,58 @@ class App extends Component {
   state = {
     isSearchButtonClicked: false,
     searchInput: '',
+    showMobileSearchBar: false,
+    isModeOn: false,
+    activeOption: 'home',
   }
 
-  onClickSearch = async input => {
+  onClickSearch = input => {
+    if (input !== '') {
+      this.setState({searchInput: input, isSearchButtonClicked: true})
+    }
+  }
+
+  onClickMobileSearchBar = input => {
     if (input !== '') {
       this.setState({isSearchButtonClicked: true})
       this.setState({searchInput: input})
     }
+    this.setState({showMobileSearchBar: true})
   }
 
   onClickLogo = () => {
-    this.setState({isSearchButtonClicked: false})
+    this.setState({isSearchButtonClicked: false, showMobileSearchBar: false})
+  }
+
+  onChangeMode = () => {
+    this.setState(prevState => ({isModeOn: !prevState.isModeOn}))
+  }
+
+  onClickTab = option => {
+    this.setState({activeOption: option})
   }
 
   render() {
-    const {searchInput, isSearchButtonClicked} = this.state
+    const {
+      searchInput,
+      isSearchButtonClicked,
+      showMobileSearchBar,
+      isModeOn,
+      activeOption,
+    } = this.state
     return (
       <InstaShareContext.Provider
         value={{
           searchInput,
           isSearchButtonClicked,
+          showMobileSearchBar,
+          isModeOn,
+          activeOption,
           onClickSearch: this.onClickSearch,
           returnHome: this.onClickLogo,
+          onClickMobileSearchBar: this.onClickMobileSearchBar,
+          onChangeMode: this.onChangeMode,
+          onClickTab: this.onClickTab,
         }}
       >
         <Switch>

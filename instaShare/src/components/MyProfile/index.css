@@ -4,6 +4,11 @@
   align-items: center;
   width: 100%;
   background: #fafafa;
+  min-height: 100vh;
+}
+
+.my-profile-bg-container {
+  background-color: #272727;
 }
 
 .my-profile-details-container {
@@ -24,6 +29,12 @@
   align-items: center;
 }
 
+@media (max-width: 576px) {
+  .my-profile-details-large-container {
+    display: none;
+  }
+}
+
 .my-profile-details {
   display: flex;
   flex-direction: column;
@@ -38,6 +49,10 @@
   font-weight: 300;
   line-height: 32px;
   margin-bottom: 24px;
+}
+
+.my-profile-dark-username {
+  color: #ffffff;
 }
 
 .followers-count-container {
@@ -61,6 +76,11 @@
   line-height: 24px;
 }
 
+.my-profile-dark-follower-count {
+  color: #ffffff;
+  font-weight: normal;
+}
+
 .highlight-post-follower-following {
   color: #262626;
   font-family: Roboto;
@@ -69,6 +89,10 @@
   font-weight: 500;
   line-height: 24px;
   margin-right: 8px;
+}
+
+.my-profile-dark-highlight {
+  color: #ffffff;
 }
 
 .my-profile-user-id {
@@ -81,6 +105,10 @@
   margin-bottom: 8px;
 }
 
+.my-profile-dark-user-id {
+  color: #ffffff;
+}
+
 .my-profile-user-bio {
   width: 675px;
   color: #262626;
@@ -91,16 +119,16 @@
   line-height: 24px;
 }
 
+.my-profile-dark-user-bio {
+  color: #a3a3a3;
+}
+
 /* FOR MOBILE */
 .my-profile-details-mobile-container {
   display: none;
 }
 
 @media (max-width: 576px) {
-  /* .my-profile-details-large-container {
-    display: none;
-  } */
-
   .my-profile-details-mobile-container {
     width: 90%;
     margin-bottom: 24px;
@@ -111,6 +139,7 @@
     display: flex;
     align-items: center;
     margin: 0px;
+    margin-bottom: 8px;
   }
 
   .my-profile-mobile-post-followers-following {
@@ -313,6 +342,7 @@ li {
     font-weight: 300;
     line-height: 24px;
     margin-bottom: 12px;
+    margin-top: 35px;
   }
 
   .my-followers-container {
@@ -395,7 +425,6 @@ li {
   .my-story-image-container {
     width: 64px;
     height: 64px;
-    background-color: red;
   }
 
   .my-profile-story {
@@ -422,7 +451,7 @@ li {
 
 @media (max-width: 576px) {
   .my-post-bg-container {
-    padding-left: 16px;
+    width: 100%;
   }
 }
 
@@ -438,10 +467,14 @@ li {
   margin-bottom: 24px;
 }
 
-.post-college-icon {
+.post-grid-icon {
   width: 24px;
   height: 24px;
   margin-right: 32px;
+}
+
+.dark-grid {
+  color: #ffffff;
 }
 
 .my-posts-heading {
@@ -451,6 +484,15 @@ li {
   font-style: normal;
   font-weight: 500;
   line-height: 32px;
+}
+
+.my-profile-dark-mode-heading {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  color: #ffffff;
 }
 
 .my-profile-loader-container {

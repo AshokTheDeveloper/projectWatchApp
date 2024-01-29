@@ -13,6 +13,7 @@ import {BiShareAlt} from 'react-icons/bi'
 import Comments from '../Comments'
 
 import './index.css'
+import InstaShareContext from '../../context/InstaShareContext'
 
 class Post extends Component {
   render() {
@@ -43,86 +44,115 @@ class Post extends Component {
     }
 
     return (
-      <li className="post-item">
-        <div>
-          <div className="profile-and-username">
-            <div className="profile-bg-container">
-              <img
-                src={profilePic}
-                alt="post author profile"
-                className="profile-image"
-              />
-            </div>
-            <Link to={`/users/${userId}`} className="post-links">
-              <h1 className="user-name">{userName}</h1>
-            </Link>
-          </div>
-          <div className="post-image-container">
-            <img src={postDetails.imageUrl} alt="post" className="post-image" />
-          </div>
-          <div className="post-description-container">
-            <ul className="likes-container">
-              {message === 'Post has been liked' ? (
-                <li className="post-icon-buttons">
-                  <button
-                    type="button"
-                    aria-label="heart icon"
-                    // -------------------TEST ID HERE ------------------
-                    testid="unLikeIcon"
-                    className="post-icon-button"
-                    onClick={onClickLiked}
-                  >
-                    <FcLike className="post-icons liked-heart" />
-                  </button>
-                </li>
-              ) : (
-                <li className="post-icon-buttons">
-                  <button
-                    type="button"
-                    aria-label="heart icon"
-                    // --------------------TEST ID HERE ------------------
-                    testid="likeIcon"
-                    className="post-icon-button"
-                    onClick={onClickUnLiked}
-                  >
-                    <BsHeart className="post-icons" />
-                  </button>
-                </li>
-              )}
+      <InstaShareContext.Consumer>
+        {value => {
+          const {isModeOn} = value
 
-              <li className="post-icon-buttons">
-                <button
-                  type="button"
-                  aria-label="comments"
-                  className="post-icon-button"
-                >
-                  <FaRegComment className="post-icons" />
-                </button>
-              </li>
-              <li className="post-icon-buttons-container">
-                <button
-                  type="button"
-                  aria-label="share icon"
-                  className="post-icon-button"
-                >
-                  <BiShareAlt className="post-icons" />
-                </button>
-              </li>
-            </ul>
-            <div className="caption-container">
-              <p className="likes-count">{likesCount} likes</p>
-              <p className="caption">{postDetails.caption}</p>
-              {comments.map(eachComment => (
-                <Comments
-                  key={eachComment.userId}
-                  commentDetails={eachComment}
-                />
-              ))}
-              <p className="created-time">{createdAt}</p>
-            </div>
-          </div>
-        </div>
-      </li>
+          // Dark mode features
+          const darkPostContainer = isModeOn ? 'dark-post-item-container' : ''
+          const darkPostUsername = isModeOn ? 'dark-post-user-name' : ''
+          const darkModeIcons = isModeOn ? 'dark-mode-icons' : ''
+          const darkModeLikesCount = isModeOn ? 'dark-mode-likes-count' : ''
+          const darkModeCaption = isModeOn ? 'dark-mode-caption' : ''
+          const darkModeCreatedTime = isModeOn ? 'dark-mode-created-time' : ''
+          return (
+            <li className={`post-item ${darkPostContainer}`}>
+              <div>
+                <div className="profile-and-username">
+                  <div className="profile-bg-container">
+                    <img
+                      src={profilePic}
+                      alt="post author profile"
+                      className="profile-image"
+                    />
+                  </div>
+                  <Link to={`/users/${userId}`} className="post-links">
+                    <h1 className={`post-user-name ${darkPostUsername}`}>
+                      {userName}
+                    </h1>
+                  </Link>
+                </div>
+                <div className="post-image-container">
+                  <img
+                    src={postDetails.imageUrl}
+                    alt="post"
+                    className="post-image"
+                  />
+                </div>
+                <div className="post-description-container">
+                  <ul className="likes-container">
+                    {message === 'Post has been liked' ? (
+                      <li className="post-icon-buttons">
+                        <button
+                          type="button"
+                          aria-label="heart icon"
+                          // -------------------TEST ID HERE ------------------
+                          data-testid="unLikeIcon"
+                          className="post-icon-button"
+                          onClick={onClickLiked}
+                        >
+                          <FcLike className="post-icons liked-heart" />
+                        </button>
+                      </li>
+                    ) : (
+                      <li className="post-icon-buttons">
+                        <button
+                          type="button"
+                          aria-label="heart icon"
+                          // --------------------TEST ID HERE ------------------
+                          data-testid="likeIcon"
+                          className="post-icon-button"
+                          onClick={onClickUnLiked}
+                        >
+                          <BsHeart className={`post-icons ${darkModeIcons}`} />
+                        </button>
+                      </li>
+                    )}
+
+                    <li className="post-icon-buttons">
+                      <button
+                        type="button"
+                        aria-label="comments"
+                        className="post-icon-button"
+                      >
+                        <FaRegComment
+                          className={`post-icons ${darkModeIcons}`}
+                        />
+                      </button>
+                    </li>
+                    <li className="post-icon-buttons-container">
+                      <button
+                        type="button"
+                        aria-label="share icon"
+                        className="post-icon-button"
+                      >
+                        <BiShareAlt className={`post-icons ${darkModeIcons}`} />
+                      </button>
+                    </li>
+                  </ul>
+                  <div className="caption-container">
+                    <p className={`likes-count ${darkModeLikesCount}`}>
+                      {likesCount} likes
+                    </p>
+                    <p className={`caption ${darkModeCaption}`}>
+                      {postDetails.caption}
+                    </p>
+                    {comments.map(eachComment => (
+                      <Comments
+                        key={eachComment.userId}
+                        commentDetails={eachComment}
+                      />
+                    ))}
+                    <p className={`created-time ${darkModeCreatedTime}`}>
+                      {createdAt}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          )
+        }}
+      </InstaShareContext.Consumer>
     )
   }
 }

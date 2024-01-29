@@ -13,6 +13,7 @@ import Header from '../Header'
 import MyPosts from '../MyPosts'
 
 import './index.css'
+import InstaShareContext from '../../context/InstaShareContext'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -79,87 +80,137 @@ class MyProfile extends Component {
       userBio,
     } = profileData
     return (
-      <>
-        <div className="my-profile-details-container">
-          <div className="my-profile-details-large-container">
-            <div className="profile-image-container">
-              <img
-                src={profilePic}
-                alt="my profile"
-                className="my-profile-pic"
-              />
-            </div>
-            <div className="my-profile-details">
-              <h1 className="my-profile-user-name">{userName}</h1>
-              <ul className="followers-count-container">
-                <li className="follower-items">
-                  <p className="post-count">
-                    <span className="highlight-post-follower-following">
-                      {postsCount}
-                    </span>
-                    posts
-                  </p>
-                </li>
-                <li className="follower-items">
-                  <p className="follower-count">
-                    <span className="highlight-post-follower-following">
-                      {followersCount}
-                    </span>
-                    followers
-                  </p>
-                </li>
-                <li className="follower-items">
-                  <p className="following-count">
-                    <span className="highlight-post-follower-following">
-                      {followingCount}
-                    </span>
-                    following
-                  </p>
-                </li>
-              </ul>
-              <div>
-                <p className="my-profile-user-id">{userId}</p>
-                <p className="my-profile-user-bio">{userBio}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <InstaShareContext.Consumer>
+        {value => {
+          const {isModeOn} = value
+          const myProfileDarkUsername = isModeOn
+            ? 'my-profile-dark-username'
+            : ''
+          const myProfileDarkPostCount = isModeOn
+            ? 'my-profile-dark-follower-count'
+            : ''
+          const myProfileDarkHighligh = isModeOn
+            ? 'my-profile-dark-highlight'
+            : ''
 
-        {/* <div className="my-profile-details-mobile-container">
-          <h1 className="my-profile-username-mobile">{userName}</h1>
-          <div className="profile-mobile-details-container">
-            <img src={profilePic} alt="my profile" className="my-profile-pic" />
-            <ul className="my-followers-container-mobile">
-              <li className="my-profile-mobile-post-followers-following">
-                <p className="mobile-post">
-                  <span className="post-highlight mobile">{postsCount}</span>
-                  posts
-                </p>
-              </li>
-              <li className="my-profile-mobile-post-followers-following">
-                <p className="mobile-followers">
-                  <span className="post-highlight mobile">
-                    {followersCount}
-                  </span>
-                  followers
-                </p>
-              </li>
-              <li className="my-profile-mobile-post-followers-following">
-                <p className="mobile-following">
-                  <span className="post-highlight mobile">
-                    {followingCount}
-                  </span>
-                  following
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p className="my-profile-mobile-user-id">{userId}</p>
-            <p className="my-profile-mobile-user-bio">{userBio}</p>
-          </div>
-        </div> */}
-      </>
+          const myProfileDarkUserId = isModeOn ? 'my-profile-dark-user-id' : ''
+          const myProfileDarkUserBio = isModeOn
+            ? 'my-profile-dark-user-bio'
+            : ''
+
+          return (
+            <>
+              <div className="my-profile-details-container">
+                <div className="my-profile-details-large-container">
+                  <div className="profile-image-container">
+                    <img
+                      src={profilePic}
+                      alt="my profile"
+                      className="my-profile-pic"
+                    />
+                  </div>
+                  <div className="my-profile-details">
+                    <h1
+                      className={`my-profile-user-name ${myProfileDarkUsername}`}
+                    >
+                      {userName}
+                    </h1>
+                    <ul className="followers-count-container">
+                      <li className="follower-items">
+                        <p className={`post-count ${myProfileDarkPostCount}`}>
+                          <span
+                            className={`highlight-post-follower-following ${myProfileDarkHighligh}`}
+                          >
+                            {postsCount}
+                          </span>
+                          posts
+                        </p>
+                      </li>
+                      <li className="follower-items">
+                        <p
+                          className={`follower-count ${myProfileDarkPostCount}`}
+                        >
+                          <span
+                            className={`highlight-post-follower-following ${myProfileDarkHighligh}`}
+                          >
+                            {followersCount}
+                          </span>
+                          followers
+                        </p>
+                      </li>
+                      <li className="follower-items">
+                        <p
+                          className={`following-count ${myProfileDarkPostCount}`}
+                        >
+                          <span
+                            className={`highlight-post-follower-following ${myProfileDarkHighligh}`}
+                          >
+                            {followingCount}
+                          </span>
+                          following
+                        </p>
+                      </li>
+                    </ul>
+                    <div>
+                      <p
+                        className={`my-profile-user-id ${myProfileDarkUserId}`}
+                      >
+                        {userId}
+                      </p>
+                      <p
+                        className={`my-profile-user-bio ${myProfileDarkUserBio}`}
+                      >
+                        {userBio}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="my-profile-details-mobile-container">
+                <h1 className="my-profile-username-mobile">{userName}</h1>
+                <div className="profile-mobile-details-container">
+                  <img
+                    src={profilePic}
+                    alt="my profile"
+                    className="my-profile-pic"
+                  />
+                  <ul className="my-followers-container-mobile">
+                    <li className="my-profile-mobile-post-followers-following">
+                      <p className="mobile-post">
+                        <span className="post-highlight mobile">
+                          {postsCount}
+                        </span>
+                        posts
+                      </p>
+                    </li>
+                    <li className="my-profile-mobile-post-followers-following">
+                      <p className="mobile-followers">
+                        <span className="post-highlight mobile">
+                          {followersCount}
+                        </span>
+                        followers
+                      </p>
+                    </li>
+                    <li className="my-profile-mobile-post-followers-following">
+                      <p className="mobile-following">
+                        <span className="post-highlight mobile">
+                          {followingCount}
+                        </span>
+                        following
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="my-profile-mobile-user-id">{userId}</p>
+                  <p className="my-profile-mobile-user-bio">{userBio}</p>
+                </div>
+              </div>
+            </>
+          )
+        }}
+      </InstaShareContext.Consumer>
     )
   }
 
@@ -195,17 +246,32 @@ class MyProfile extends Component {
         {lengthOfPosts === 0 ? (
           this.renderNoPostsView()
         ) : (
-          <div className="my-post-bg-container">
-            <div className="my-posts-heading-container">
-              <BsGrid3X3 className="post-college-icon" />
-              <h1 className="my-posts-heading">Posts</h1>
-            </div>
-            <ul className="my-profile-posts-container">
-              {profileData.posts.map(eachItem => (
-                <MyPosts key={eachItem.id} postDetails={eachItem} />
-              ))}
-            </ul>
-          </div>
+          <InstaShareContext.Consumer>
+            {value => {
+              const {isModeOn} = value
+
+              // Dark theme feature
+              const myProfileDarkGrid = isModeOn ? 'dark-grid' : ''
+              const myProfileDarkModeHeading = isModeOn
+                ? 'my-profile-dark-mode-heading'
+                : 'my-posts-heading'
+              return (
+                <div className="my-post-bg-container">
+                  <div className="my-posts-heading-container">
+                    <BsGrid3X3
+                      className={`post-grid-icon ${myProfileDarkGrid}`}
+                    />
+                    <h1 className={`${myProfileDarkModeHeading}`}>Posts</h1>
+                  </div>
+                  <ul className="my-profile-posts-container">
+                    {profileData.posts.map(eachItem => (
+                      <MyPosts key={eachItem.id} postDetails={eachItem} />
+                    ))}
+                  </ul>
+                </div>
+              )
+            }}
+          </InstaShareContext.Consumer>
         )}
       </>
     )
@@ -257,7 +323,7 @@ class MyProfile extends Component {
   // --------------------TEST ID HERE ------------------
 
   renderMyProfileLoadingView = () => (
-    <div className="my-profile-loader-container" testid="loader">
+    <div className="my-profile-loader-container" data-testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={50} width={50} />
     </div>
   )
@@ -280,7 +346,23 @@ class MyProfile extends Component {
     return (
       <>
         <Header />
-        <div className="my-profile-container">{this.renderResultView()}</div>
+        <InstaShareContext.Consumer>
+          {value => {
+            const {isModeOn} = value
+
+            // Dark theme feature
+            const darkMyProfileBgContainer = isModeOn
+              ? 'my-profile-bg-container'
+              : ''
+            return (
+              <div
+                className={`my-profile-container ${darkMyProfileBgContainer}`}
+              >
+                {this.renderResultView()}
+              </div>
+            )
+          }}
+        </InstaShareContext.Consumer>
       </>
     )
   }

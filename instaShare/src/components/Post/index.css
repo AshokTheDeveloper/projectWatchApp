@@ -7,6 +7,11 @@
   width: 100%;
 }
 
+.dark-post-item-container {
+  background-color: #363636;
+  border-color: gray;
+}
+
 @media (max-width: 576px) {
   .post-item {
     border-radius: 0px;
@@ -41,15 +46,18 @@
   height: 40px;
   border-radius: 28px;
 }
-.user-name {
+.post-user-name {
   color: #262626;
-  text-align: center;
   font-family: Roboto;
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
+  font-weight: 500;
+  line-height: 18px;
   margin-left: 16px;
+}
+
+.dark-post-user-name {
+  color: #ffffff;
 }
 
 .post-image-container {
@@ -115,6 +123,10 @@
   height: 18px;
 }
 
+.dark-mode-icons {
+  color: #ffffff;
+}
+
 .liked-heart {
   width: 24px;
   height: 30px;
@@ -130,6 +142,10 @@
   margin-bottom: 8px;
 }
 
+.dark-mode-likes-count {
+  color: #ffffff;
+}
+
 .caption {
   color: #262626;
   font-family: Roboto;
@@ -138,6 +154,10 @@
   font-weight: 400;
   line-height: 18px;
   margin-bottom: 8px;
+}
+
+.dark-mode-caption {
+  color: #ffffff;
 }
 
 .created-time {
@@ -150,6 +170,41 @@
   margin-bottom: 18px;
 }
 
+.dark-mode-created-time {
+  color: #b4b4b4;
+}
+
 .post-links {
   text-decoration: none;
+}
+
+@media (max-width: 576px) {
+  .created-time {
+    color: #989898;
+    font-family: Roboto;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.05px;
+  }
+  .likes-count {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: -0.07px;
+  }
+
+  .caption {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: -0.07px;
+  }
 }

@@ -4,6 +4,11 @@
   align-items: center;
   width: 100%;
   background: #fafafa;
+  min-height: 100vh;
+}
+
+.dark-user-profile-bg {
+  background-color: #272727;
 }
 
 .my-profile-details-container {
@@ -15,11 +20,11 @@
   margin-bottom: 64px;
 }
 
-/* @media (max-width: 576px) {
+@media (max-width: 576px) {
   .my-profile-details-container {
     display: none;
   }
-} */
+}
 
 /*----------------------NEWLY ADDED CODE ----------------- */
 
@@ -52,6 +57,10 @@
   margin-bottom: 24px;
 }
 
+.dark-user-profile-username {
+  color: #ffffff;
+}
+
 .user-followers-count-container {
   display: flex;
   padding: 0px;
@@ -71,6 +80,10 @@
   line-height: 24px;
 }
 
+.dark-mode-count-container {
+  color: #fafafa;
+}
+
 .highlight-user-followers {
   color: #262626;
   font-family: Roboto;
@@ -79,6 +92,10 @@
   font-weight: 500;
   line-height: 24px;
   margin-right: 8px;
+}
+
+.dark-user-profile-highlight {
+  color: #ffffff;
 }
 
 .user-profile-user-id {
@@ -90,6 +107,10 @@
   line-height: 24px;
   margin-bottom: 8px;
 }
+
+.dark-user-profile-user-id {
+  color: #fafafa;
+}
 .user-profile-user-bio {
   width: 675px;
   color: #262626;
@@ -98,6 +119,90 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
+}
+
+.dark-user-profile-user-bio {
+  color: #fafafa;
+}
+
+.user-profile-details-mobile-container {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .user-profile-details-mobile-container {
+    width: 90%;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .user-profile-mobile-details-container {
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    margin-bottom: 8px;
+  }
+
+  .user-profile-username-mobile {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    display: flex;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+
+  .user-followers-container-mobile {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+  }
+
+  .user-profile-mobile-post-followers-following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 24px;
+  }
+
+  .user-mobile-followers,
+  .user-mobile-post,
+  .user-mobile-following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #262626;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  .user-profile-mobile-user-id {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  .user-profile-mobile-user-bio {
+    color: #262626;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
 }
 
 /*----------------------END ----------------- */

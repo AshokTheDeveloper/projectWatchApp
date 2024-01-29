@@ -1,6 +1,6 @@
 .my-post-item {
   list-style-type: none;
-  width: 320px;
+  width: 330px;
   height: 330px;
   margin-right: 25px;
   margin-bottom: 24px;
@@ -8,10 +8,10 @@
 
 @media (max-width: 576px) {
   .my-post-item {
-    width: 118px;
-    height: 118px;
+    width: 154px;
+    height: 154px;
     margin-right: 3px;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
   }
 }
 
@@ -22,7 +22,7 @@
 
 @media (max-width: 576px) {
   .my-post-image {
-    width: 118px;
-    height: 118px;
+    width: 100%;
+    height: 150px;
   }
 }

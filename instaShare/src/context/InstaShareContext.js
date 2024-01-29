@@ -5,6 +5,12 @@ const InstaShareContext = React.createContext({
   onClickSearch: () => {},
   isSearchButtonClicked: false,
   returnHome: () => {},
+  onClickMobileSearchBar: () => {},
+  showMobileSearchBar: false,
+  onChangeMode: () => {},
+  isModeOn: false,
+  onClickTab: () => {},
+  activeOption: 'home',
 })
 
 export default InstaShareContext

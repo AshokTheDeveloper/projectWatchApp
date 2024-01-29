@@ -26,11 +26,14 @@ const apiStatusConstants = {
 }
 
 class Home extends Component {
-  state = {
-    storiesData: [],
-    postsData: [],
-    apiStatus: apiStatusConstants.initial,
-    storyApiStatus: apiStatusConstants.initial,
+  constructor(props) {
+    super(props)
+    this.state = {
+      storiesData: [],
+      postsData: [],
+      apiStatus: apiStatusConstants.initial,
+      storyApiStatus: apiStatusConstants.initial,
+    }
   }
 
   componentDidMount() {
@@ -93,7 +96,7 @@ class Home extends Component {
         {
           breakpoint: 480,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 4,
             slidesToScroll: 1,
           },
         },
@@ -117,7 +120,7 @@ class Home extends Component {
   // --------------------TEST ID HERE ------------------
 
   renderStoriesLoadingView = () => (
-    <div className="stories-loader-container" testid="loader">
+    <div className="stories-loader-container" data-testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={30} height={30} />
     </div>
   )
@@ -246,24 +249,34 @@ class Home extends Component {
   renderPosts = () => {
     const {postsData} = this.state
     return (
-      <>
-        <ul className="post-container">
-          {postsData.map(eachItem => (
-            <Post
-              key={eachItem.postId}
-              post={eachItem}
-              onLikedPost={this.onClickLikedPost}
-            />
-          ))}
-        </ul>
-      </>
+      <InstaShareContext.Consumer>
+        {value => {
+          const {isModeOn} = value
+
+          // Dark theme feature
+          const darkPostContainer = isModeOn ? 'dark-post-container' : ''
+          return (
+            <>
+              <ul className={`post-container ${darkPostContainer}`}>
+                {postsData.map(eachItem => (
+                  <Post
+                    key={eachItem.postId}
+                    post={eachItem}
+                    onLikedPost={this.onClickLikedPost}
+                  />
+                ))}
+              </ul>
+            </>
+          )
+        }}
+      </InstaShareContext.Consumer>
     )
   }
 
   // --------------------TEST ID HERE ------------------
 
   renderPostsLoading = () => (
-    <div className="posts-loader-container" testid="loader">
+    <div className="posts-loader-container" data-testid="loader">
       <Loader type="TailSpin" color="#4094EF" width={50} height={50} />
     </div>
   )
@@ -303,11 +316,51 @@ class Home extends Component {
     }
   }
 
+  renderMobileSearchBar = () => (
+    <div className="mobile-search-results-bg-container">
+      <div className="mobile-search-icons-container">
+        <img
+          src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706408725/search_2_c4wg3r.svg"
+          alt="mobile search"
+          className="mobile-search-view-icon"
+        />
+        <div className="star-icons-container">
+          <img
+            src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706409069/Frame_1472_ivgbom.svg"
+            alt="star icon"
+            className="star-icon-1"
+          />
+          <img
+            src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706409069/Frame_1472_ivgbom.svg"
+            alt="star icon"
+            className="star-icon-2"
+          />
+        </div>
+      </div>
+      <p className="mobile-search-description">
+        Search Results will be appear here
+      </p>
+    </div>
+  )
+
   renderFinalView = () => (
-    <>
-      {this.renderStoriesResultView()}
-      {this.renderPostsResult()}
-    </>
+    <InstaShareContext.Consumer>
+      {value => {
+        const {showMobileSearchBar} = value
+        return (
+          <>
+            {showMobileSearchBar === true ? (
+              this.renderMobileSearchBar()
+            ) : (
+              <>
+                {this.renderStoriesResultView()}
+                {this.renderPostsResult()}
+              </>
+            )}
+          </>
+        )
+      }}
+    </InstaShareContext.Consumer>
   )
 
   renderResult = () => (
@@ -324,10 +377,20 @@ class Home extends Component {
 
   render() {
     return (
-      <>
-        <Header />
-        <div className="home-bg-container">{this.renderResult()}</div>
-      </>
+      <InstaShareContext.Consumer>
+        {value => {
+          const {isModeOn} = value
+          const darkHomeBgContainer = isModeOn ? 'home-dark-bg-container' : ''
+          return (
+            <>
+              <Header />
+              <div className={`home-bg-container ${darkHomeBgContainer}`}>
+                {this.renderResult()}
+              </div>
+            </>
+          )
+        }}
+      </InstaShareContext.Consumer>
     )
   }
 }
