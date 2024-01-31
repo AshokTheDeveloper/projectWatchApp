@@ -117,10 +117,19 @@ class Header extends Component {
           const darkModeButton = isModeOn ? 'dark-mode-button' : ''
 
           const darkModeSeparator = isModeOn ? 'dark-mode-separator' : ''
-
+          const darkModeMobileLogoHamburger = isModeOn
+            ? 'dark-mode-mobile-logo-ham-burger'
+            : ''
           // Mobile dark mode feature
           const mobileDarkModeButton = isModeOn
             ? 'mobile-dark-mode-button-bg'
+            : ''
+
+          const mobileDarkSearchBar = isModeOn
+            ? 'mobile-home-search-profile-dark-mode'
+            : ''
+          const mobileDarkSearchInput = isModeOn
+            ? 'mobile-search-input-dark'
             : ''
 
           return (
@@ -223,7 +232,7 @@ class Header extends Component {
                       </button>
                     </li>
                   </ul>
-                  <div className="mobile-nav-links">
+                  <div className="mobile-options-links-container">
                     <button
                       type="button"
                       className={`mobile-dark-mode-button ${mobileDarkModeButton}`}
@@ -241,7 +250,10 @@ class Header extends Component {
                       onClick={this.onClickHamburger}
                       className="hamburger-button"
                     >
-                      <GiHamburgerMenu size={24} color="#262626" />
+                      <GiHamburgerMenu
+                        size={24}
+                        className={`mobile-ham-burger ${darkModeMobileLogoHamburger}`}
+                      />
                     </button>
                   </div>
                 </div>
@@ -251,7 +263,10 @@ class Header extends Component {
                     <li className="list-item mobile-nav-links-container">
                       <li className="list-item mobile-item">
                         <Link to="/" className="links">
-                          <button type="button" className="mobile-nav-link">
+                          <button
+                            type="button"
+                            className={`mobile-nav-link ${mobileDarkSearchBar}`}
+                          >
                             Home
                           </button>
                         </Link>
@@ -260,7 +275,7 @@ class Header extends Component {
                         <button
                           type="button"
                           aria-label="search button"
-                          className="mobile-nav-link"
+                          className={`mobile-nav-link ${mobileDarkSearchBar}`}
                           onClick={onClickMobileSearch}
                           // --------------------TEST ID HERE ------------------
                           data-testid="searchIcon"
@@ -270,7 +285,10 @@ class Header extends Component {
                       </li>
                       <li className="list-item mobile-item">
                         <Link to="/my-profile" className="links">
-                          <button type="button" className="mobile-nav-link">
+                          <button
+                            type="button"
+                            className={`mobile-nav-link ${mobileDarkSearchBar}`}
+                          >
                             Profile
                           </button>
                         </Link>
@@ -292,17 +310,22 @@ class Header extends Component {
                         onClick={this.onClickCloseNavbar}
                         className="close-button"
                       >
-                        <IoIosCloseCircle size={24} />
+                        <IoIosCloseCircle
+                          size={24}
+                          className={`${logoDarkMode}`}
+                        />
                       </button>
                     </li>
                   </ul>
                 )}
 
                 {showSearchBar && (
-                  <div className="mobile-input-container">
+                  <div
+                    className={`mobile-input-container ${mobileDarkSearchInput}`}
+                  >
                     <input
                       type="search"
-                      className="mobile-input-search-bar"
+                      className={`mobile-input-search-bar ${mobileDarkSearchInput}`}
                       placeholder="Search Caption"
                       value={searchInput}
                       onChange={this.onMobileInputChange}

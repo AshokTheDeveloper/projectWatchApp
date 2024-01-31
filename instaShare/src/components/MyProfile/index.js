@@ -98,6 +98,14 @@ class MyProfile extends Component {
             ? 'my-profile-dark-user-bio'
             : ''
 
+          const mobileMyProfileUsernameDark = isModeOn
+            ? 'dark-user-profile-username'
+            : ''
+
+          const myProfilePostFollowFollowingCount = isModeOn
+            ? 'dark-mode-count-container'
+            : ''
+
           return (
             <>
               <div className="my-profile-details-container">
@@ -168,7 +176,11 @@ class MyProfile extends Component {
               </div>
 
               <div className="my-profile-details-mobile-container">
-                <h1 className="my-profile-username-mobile">{userName}</h1>
+                <h1
+                  className={`my-profile-username-mobile ${mobileMyProfileUsernameDark}`}
+                >
+                  {userName}
+                </h1>
                 <div className="profile-mobile-details-container">
                   <img
                     src={profilePic}
@@ -177,24 +189,34 @@ class MyProfile extends Component {
                   />
                   <ul className="my-followers-container-mobile">
                     <li className="my-profile-mobile-post-followers-following">
-                      <p className="mobile-post">
-                        <span className="post-highlight mobile">
+                      <p className={`mobile-post ${myProfileDarkPostCount}`}>
+                        <span
+                          className={`post-highlight mobile ${myProfilePostFollowFollowingCount}`}
+                        >
                           {postsCount}
                         </span>
                         posts
                       </p>
                     </li>
                     <li className="my-profile-mobile-post-followers-following">
-                      <p className="mobile-followers">
-                        <span className="post-highlight mobile">
+                      <p
+                        className={`mobile-followers ${myProfileDarkPostCount}`}
+                      >
+                        <span
+                          className={`mobile ${myProfilePostFollowFollowingCount}`}
+                        >
                           {followersCount}
                         </span>
                         followers
                       </p>
                     </li>
                     <li className="my-profile-mobile-post-followers-following">
-                      <p className="mobile-following">
-                        <span className="post-highlight mobile">
+                      <p
+                        className={`mobile-following ${myProfileDarkPostCount}`}
+                      >
+                        <span
+                          className={`mobile ${myProfilePostFollowFollowingCount}`}
+                        >
                           {followingCount}
                         </span>
                         following
@@ -203,8 +225,16 @@ class MyProfile extends Component {
                   </ul>
                 </div>
                 <div>
-                  <p className="my-profile-mobile-user-id">{userId}</p>
-                  <p className="my-profile-mobile-user-bio">{userBio}</p>
+                  <p
+                    className={`my-profile-mobile-user-id ${myProfileDarkUserId}`}
+                  >
+                    {userId}
+                  </p>
+                  <p
+                    className={`my-profile-mobile-user-bio ${myProfileDarkUserBio}`}
+                  >
+                    {userBio}
+                  </p>
                 </div>
               </div>
             </>

@@ -6,6 +6,8 @@ import Loader from 'react-loader-spinner'
 
 import Slider from 'react-slick'
 
+import {BsSearch} from 'react-icons/bs'
+
 import Header from '../Header'
 
 import StoriesItem from '../StoriesItem'
@@ -319,11 +321,7 @@ class Home extends Component {
   renderMobileSearchBar = () => (
     <div className="mobile-search-results-bg-container">
       <div className="mobile-search-icons-container">
-        <img
-          src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706408725/search_2_c4wg3r.svg"
-          alt="mobile search"
-          className="mobile-search-view-icon"
-        />
+        <BsSearch className="mobile-search-view-icon" />
         <div className="star-icons-container">
           <img
             src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706409069/Frame_1472_ivgbom.svg"

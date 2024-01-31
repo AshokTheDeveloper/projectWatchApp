@@ -8,7 +8,7 @@
 }
 
 .my-profile-bg-container {
-  background-color: #272727;
+  background-color: #050505;
 }
 
 .my-profile-details-container {
@@ -51,10 +51,6 @@
   margin-bottom: 24px;
 }
 
-.my-profile-dark-username {
-  color: #ffffff;
-}
-
 .followers-count-container {
   padding: 0px;
   display: flex;
@@ -76,11 +72,6 @@
   line-height: 24px;
 }
 
-.my-profile-dark-follower-count {
-  color: #ffffff;
-  font-weight: normal;
-}
-
 .highlight-post-follower-following {
   color: #262626;
   font-family: Roboto;
@@ -89,10 +80,6 @@
   font-weight: 500;
   line-height: 24px;
   margin-right: 8px;
-}
-
-.my-profile-dark-highlight {
-  color: #ffffff;
 }
 
 .my-profile-user-id {
@@ -105,10 +92,6 @@
   margin-bottom: 8px;
 }
 
-.my-profile-dark-user-id {
-  color: #ffffff;
-}
-
 .my-profile-user-bio {
   width: 675px;
   color: #262626;
@@ -117,10 +100,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-}
-
-.my-profile-dark-user-bio {
-  color: #a3a3a3;
 }
 
 /* FOR MOBILE */
@@ -353,15 +332,6 @@ li {
     display: none;
   }
 
-  .mobile {
-    color: #262626;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px; /* 150% */
-  }
-
   .post-followers-following-mobile {
     color: #262626;
     font-family: Roboto;
@@ -585,4 +555,29 @@ li {
   font-style: normal;
   font-weight: 300;
   line-height: 48px;
+}
+
+.my-profile-dark-username {
+  color: #ffffff;
+}
+
+.my-profile-dark-follower-count {
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.my-profile-dark-highlight {
+  color: #ffffff;
+}
+
+.my-profile-dark-user-id {
+  color: #ffffff;
+}
+
+.my-profile-dark-user-bio {
+  color: #f1f1f1;
+}
+
+.username-mobile-dark-my-profile {
+  color: #fefefe;
 }

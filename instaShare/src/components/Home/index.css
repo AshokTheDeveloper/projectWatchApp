@@ -6,7 +6,7 @@
 }
 
 .home-dark-bg-container {
-  background-color: #272727;
+  background-color: #050505;
 }
 
 .slider-container {
@@ -93,7 +93,7 @@
 }
 
 .dark-post-container {
-  background-color: #272727;
+  background-color: #050505;
 }
 
 @media (max-width: 576px) {

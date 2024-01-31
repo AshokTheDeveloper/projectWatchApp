@@ -8,7 +8,7 @@
 }
 
 .dark-post-item-container {
-  background-color: #363636;
+  background-color: #050505;
   border-color: gray;
 }
 
@@ -56,10 +56,6 @@
   margin-left: 16px;
 }
 
-.dark-post-user-name {
-  color: #ffffff;
-}
-
 .post-image-container {
   border: 1px solid #dbdbdb;
   border-top: none;
@@ -70,6 +66,7 @@
 .post-image {
   width: 100%;
   margin: 0px;
+  border: none;
 }
 
 @media (max-width: 576px) {
@@ -123,10 +120,6 @@
   height: 18px;
 }
 
-.dark-mode-icons {
-  color: #ffffff;
-}
-
 .liked-heart {
   width: 24px;
   height: 30px;
@@ -142,10 +135,6 @@
   margin-bottom: 8px;
 }
 
-.dark-mode-likes-count {
-  color: #ffffff;
-}
-
 .caption {
   color: #262626;
   font-family: Roboto;
@@ -156,10 +145,6 @@
   margin-bottom: 8px;
 }
 
-.dark-mode-caption {
-  color: #ffffff;
-}
-
 .created-time {
   color: #989898;
   font-family: Roboto;
@@ -168,10 +153,6 @@
   font-weight: 400;
   line-height: 18px;
   margin-bottom: 18px;
-}
-
-.dark-mode-created-time {
-  color: #b4b4b4;
 }
 
 .post-links {
@@ -207,4 +188,24 @@
     line-height: 16px;
     letter-spacing: -0.07px;
   }
+}
+
+.dark-post-user-name {
+  color: #ffffff;
+}
+
+.dark-mode-icons {
+  color: #ffffff;
+}
+
+.dark-mode-caption {
+  color: #ffffff;
+}
+
+.dark-mode-created-time {
+  color: #b4b4b4;
+}
+
+.dark-mode-likes-count {
+  color: #ffffff;
 }

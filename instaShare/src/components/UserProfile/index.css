@@ -7,10 +7,6 @@
   min-height: 100vh;
 }
 
-.dark-user-profile-bg {
-  background-color: #272727;
-}
-
 .my-profile-details-container {
   display: flex;
   align-items: center;
@@ -57,10 +53,6 @@
   margin-bottom: 24px;
 }
 
-.dark-user-profile-username {
-  color: #ffffff;
-}
-
 .user-followers-count-container {
   display: flex;
   padding: 0px;
@@ -80,10 +72,6 @@
   line-height: 24px;
 }
 
-.dark-mode-count-container {
-  color: #fafafa;
-}
-
 .highlight-user-followers {
   color: #262626;
   font-family: Roboto;
@@ -92,10 +80,6 @@
   font-weight: 500;
   line-height: 24px;
   margin-right: 8px;
-}
-
-.dark-user-profile-highlight {
-  color: #ffffff;
 }
 
 .user-profile-user-id {
@@ -108,9 +92,6 @@
   margin-bottom: 8px;
 }
 
-.dark-user-profile-user-id {
-  color: #fafafa;
-}
 .user-profile-user-bio {
   width: 675px;
   color: #262626;
@@ -119,10 +100,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
-}
-
-.dark-user-profile-user-bio {
-  color: #fafafa;
 }
 
 .user-profile-details-mobile-container {
@@ -578,4 +555,35 @@ li {
   font-style: normal;
   font-weight: 300;
   line-height: 48px; /* 150% */
+}
+
+/* Dark theme feature */
+
+.dark-user-profile-bg {
+  background-color: #050505;
+}
+
+.dark-user-profile-username {
+  color: #ffffff;
+}
+
+.dark-mode-count-container {
+  color: #fafafa;
+  font-weight: normal;
+}
+
+.dark-user-profile-highlight {
+  color: #ffffff;
+}
+
+.dark-user-profile-user-id {
+  color: #fafafa;
+}
+
+.dark-user-profile-user-bio {
+  color: #fafafa;
+}
+
+.dark-mode-user-posts-heading {
+  color: #fafafa;
 }
