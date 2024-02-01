@@ -134,12 +134,14 @@
   }
 }
 
+/* navbar */
 .nav-items-container {
   list-style-type: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0px;
+  width: 80%;  
 }
 
 .mobile-nav-links {
@@ -262,6 +264,10 @@
   display: none;
 }
 
+.hamburger-button {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .mobile-nav-items {
     display: flex;
@@ -313,6 +319,7 @@
   }
 
   .hamburger-button {
+    display: block;
     background: none;
     border: none;
     outline: none;
@@ -341,6 +348,15 @@
 .mobile-input-container {
   display: none;
 }
+
+.mobile-dark-mode-button {
+  display: none;
+}
+
+.mobile-ham-burger {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .mobile-input-container {
     display: flex;
@@ -429,6 +445,7 @@
   }
 
   .mobile-ham-burger {
+    display: block;
     color: #262626;
   }
 

@@ -65,8 +65,7 @@
 
 .post-image {
   width: 100%;
-  margin: 0px;
-  border: none;
+  border-right: 0px;
 }
 
 @media (max-width: 576px) {

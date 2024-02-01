@@ -137,3 +137,11 @@
     display: none;
   }
 }
+
+.on-dark-mode-search-results-heading {
+  color: #fafafa;
+}
+
+.on-dark-theme-search-not-found {
+  color: #cecece;
+}

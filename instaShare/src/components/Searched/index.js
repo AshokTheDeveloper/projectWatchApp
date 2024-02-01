@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner'
 import Post from '../Post'
 
 import './index.css'
+import InstaShareContext from '../../context/InstaShareContext'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -112,20 +113,32 @@ class Searched extends Component {
     const {searchResults} = this.state
 
     return (
-      <div className="searched-posts-bg-container">
-        <div className="searched-posts-heading-container">
-          <h1 className="searched-posts-heading">Search Results</h1>
-        </div>
-        <ul className="post-container">
-          {searchResults.map(eachItem => (
-            <Post
-              key={eachItem.postId}
-              post={eachItem}
-              onLikedPost={this.onClickLikedPost}
-            />
-          ))}
-        </ul>
-      </div>
+      <InstaShareContext.Consumer>
+        {value => {
+          const {isModeOn} = value
+          const onDarkMode = isModeOn
+            ? 'on-dark-mode-search-results-heading'
+            : ''
+          return (
+            <div className="searched-posts-bg-container">
+              <div className="searched-posts-heading-container">
+                <h1 className={`searched-posts-heading ${onDarkMode}`}>
+                  Search Results
+                </h1>
+              </div>
+              <ul className="post-container">
+                {searchResults.map(eachItem => (
+                  <Post
+                    key={eachItem.postId}
+                    post={eachItem}
+                    onLikedPost={this.onClickLikedPost}
+                  />
+                ))}
+              </ul>
+            </div>
+          )
+        }}
+      </InstaShareContext.Consumer>
     )
   }
 
@@ -158,17 +171,33 @@ class Searched extends Component {
   )
 
   renderNoSearchedResultsView = () => (
-    <div className="no-search-results-container">
-      <img
-        src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706101673/Group_cvsqqf.svg"
-        alt="search not found"
-        className="no-search-image"
-      />
-      <h1 className="no-search-results-heading">Search Not Found</h1>
-      <p className="no-search-results-description">
-        Try different keyword or search again
-      </p>
-    </div>
+    <InstaShareContext.Consumer>
+      {value => {
+        const {isModeOn} = value
+        const onDarkThemeSearchNotFound = isModeOn
+          ? 'on-dark-theme-search-not-found'
+          : ''
+        return (
+          <div className="no-search-results-container">
+            <img
+              src="https://res.cloudinary.com/daecqm1j8/image/upload/v1706101673/Group_cvsqqf.svg"
+              alt="search not found"
+              className="no-search-image"
+            />
+            <h1
+              className={`no-search-results-heading ${onDarkThemeSearchNotFound}`}
+            >
+              Search Not Found
+            </h1>
+            <p
+              className={`no-search-results-description ${onDarkThemeSearchNotFound}`}
+            >
+              Try different keyword or search again
+            </p>
+          </div>
+        )
+      }}
+    </InstaShareContext.Consumer>
   )
 
   renderResultView = () => {
